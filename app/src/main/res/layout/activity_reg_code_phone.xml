@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#111828"
+    tools:context=".RegActivityCodePhone">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="messenger"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="#a855f7"
+        app:layout_constraintVertical_bias="0.07" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Введите код"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:textColor="@color/white" />
+    <TextView
+        android:id="@+id/main_label"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="Мы отправились вам sms с кодом на ваш номер телефона"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="1dp"
+        android:textColor="@color/white" />
+
+
+    <EditText
+        android:id="@+id/userCode"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:layout_marginTop="15dp"
+        android:inputType="phone"
+        android:textColorHint="#49454f"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:hint="введите код с sms" />
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="204dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="продолжить"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/back_To_Phone_Register"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:text="отмена" />
+
+</LinearLayout>

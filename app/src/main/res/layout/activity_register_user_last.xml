@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#111828"
+    tools:context=".Register_user_last">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="messenger"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="#a855f7"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Создайте профиль"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:textColor="@color/white" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="200dp"
+        android:layout_gravity="end"
+        android:orientation="horizontal"
+        tools:context=".Register_user_last">
+
+        <ImageView
+            android:id="@+id/img_test"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/sticker"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+
+            tools:context=".Register_user_last">
+
+            <EditText
+                android:id="@+id/userFirstName"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+
+                android:ems="10"
+                android:hint="введите имя"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="#49454f" />
+
+            <EditText
+                android:id="@+id/userLastName"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:hint="введите фамилию"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="#49454f" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="204dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:text="продолжить"
+        android:textStyle="bold" />
+
+</LinearLayout>
