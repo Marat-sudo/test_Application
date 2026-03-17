@@ -5,6 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.myapplication_2"
+    viewBinding.enable = true
     compileSdk {
         version = release(36)
     }
@@ -38,6 +39,12 @@ android {
 }
 
 dependencies {
+    implementation(libs.materialdrawer)
+
+    implementation (libs.androidx.recyclerview)
+    implementation (libs.androidx.annotation)
+    implementation (libs.material)
+
     implementation(libs.coil.kt)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
