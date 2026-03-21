@@ -1,6 +1,8 @@
 package com.example.myapplication_2
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -22,7 +24,7 @@ class Register_user_last : AppCompatActivity() {
         }
 
         val imageView: ImageView = findViewById(R.id.img_test)
-
+        val nextB: Button = findViewById(R.id.next_button)
         // создается регистер, контакт - PickVisualMedia
         //val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia())
         //{ uri ->
@@ -48,6 +50,13 @@ class Register_user_last : AppCompatActivity() {
             // launch отпрвяелт пользоваотеля в галлерею
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
+
+
+        nextB.setOnClickListener {
+            val intent = Intent(this, MainLayoutTest::class.java)
+            startActivity(intent)
+        }
+
 
     }
 }

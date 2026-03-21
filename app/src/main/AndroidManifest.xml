@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication_2">
         <activity
+            android:name=".MainLayoutTest"
+            android:exported="false" />
+        <activity
             android:name=".Register_user_last"
             android:exported="false" />
         <activity
