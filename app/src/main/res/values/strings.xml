@@ -1,3 +1,34 @@
 <resources>
-    <string name="app_name">My Application_2</string>
+    <string name="app_name">Dialect</string>
+    <string name="next">Продолжить</string>
+    <string name="cancellation">Отмена</string>
+
+
+    // login and reg
+    <string name="createAcс">Создать аккаунт</string>
+    <string name="login">войти</string>
+
+    <string name="code">Введите код</string>
+    <string name="codeToSms">Мы отправились вам sms с кодом на ваш номер телефона</string>
+    <string name="codeFromSms">введите код с sms</string>
+    <string name="phoneNumberFromUser">введите номер телефона</string>
+
+    <string name="CreateProfile">Создайте профиль</string>
+    <string name="enterName">введите имя</string>
+    <string name="enterSecondName">введите фамилию</string>
+    <string name="codeError">проблема с кодом</string>
+
+
+    // Toolbar
+    <string name="MyProfile">Мой профиль</string>
+    <string name="secondInBar">архив?</string>
+    <string name="CreateGroup">Создать группу</string>
+    <string name="createChat">Создать чат</string>
+    <string name="contacts">Контакты</string>
+    <string name="calls">Звонки</string>
+    <string name="favourites">Избранное</string>
+    <string name="settings">Настройки</string>
+    <string name="phoneError">"проблема с номером: "</string>
+
+
 </resources>

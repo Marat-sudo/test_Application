@@ -36,7 +36,7 @@ class reg_or_log : AppCompatActivity() {
             }
 
             else
-                Toast.makeText(this, "проблема с номером $log", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.phoneError) + log, Toast.LENGTH_LONG).show()
         }
     }
 }

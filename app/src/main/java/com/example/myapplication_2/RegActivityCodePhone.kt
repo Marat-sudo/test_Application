@@ -30,17 +30,17 @@ class RegActivityCodePhone : AppCompatActivity() {
         val nextButton: Button = findViewById(R.id.next_button)
         nextButton.setOnClickListener {
             // ответ от бэка
-            val tinCode = true
+            val timCode = true
             val code: EditText = findViewById(R.id.userCode)
             val log = code.text.toString().trim()
 
-            if (log != "" && tinCode){
+            if (log != "" && timCode){
                 val intent = Intent(this, Register_user_last::class.java)
                 startActivity(intent)
             }
 
             else
-                Toast.makeText(this, "проблема с кодом", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.codeError), Toast.LENGTH_LONG).show()
         }
     }
 

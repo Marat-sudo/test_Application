@@ -12,8 +12,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="messenger"
-        android:textSize="25dp"
+        android:text="@string/app_name"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
@@ -25,7 +25,7 @@
         android:id="@+id/main_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Создать аккаунт"
+        android:text="@string/createAcс"
         android:textSize="30sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -43,7 +43,7 @@
         android:textColor="@color/white"
         android:textColorHint="#49454f"
         android:layout_gravity="center"
-        android:hint="введите номер телефона" />
+        android:hint="@string/phoneNumberFromUser" />
 
     <Button
         android:id="@+id/buttonRegister"
@@ -52,7 +52,7 @@
         android:layout_marginTop="40dp"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:text="продолжить" />
+        android:text="@string/next" />
 
     <Button
         android:id="@+id/buttonLogin"
@@ -61,6 +61,6 @@
         android:layout_marginTop="25dp"
         android:layout_gravity="center"
         android:textStyle="italic"
-        android:text="войти" />
+        android:text="@string/login" />
 
 </LinearLayout>

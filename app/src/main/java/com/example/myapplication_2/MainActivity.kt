@@ -2,6 +2,7 @@ package com.example.myapplication_2
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -18,7 +19,19 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val intent = Intent(this, reg_or_log::class.java)
-        startActivity(intent)
+        val br: Button = findViewById(R.id.button4)
+        val bl: Button = findViewById(R.id.button3)
+
+
+        br.setOnClickListener {
+            val intent = Intent(this, reg_or_log::class.java)
+            startActivity(intent)
+        }
+
+        bl.setOnClickListener {
+            val intent = Intent(this, MainLayoutTest::class.java)
+            startActivity(intent)
+        }
+
     }
 }

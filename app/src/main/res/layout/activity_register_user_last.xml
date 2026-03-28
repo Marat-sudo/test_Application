@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="messenger"
+        android:text="@string/app_name"
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Создайте профиль"
+        android:text="@string/CreateProfile"
         android:textSize="30sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -63,7 +63,7 @@
                 android:layout_gravity="center"
 
                 android:ems="10"
-                android:hint="введите имя"
+                android:hint="@string/enterName"
                 android:inputType="text"
                 android:textColor="@color/white"
                 android:textColorHint="#49454f" />
@@ -74,7 +74,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:ems="10"
-                android:hint="введите фамилию"
+                android:hint="@string/enterSecondName"
                 android:inputType="text"
                 android:textColor="@color/white"
                 android:textColorHint="#49454f" />
@@ -87,7 +87,7 @@
         android:layout_width="204dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:text="продолжить"
+        android:text="@string/next"
         android:textStyle="bold" />
 
 </LinearLayout>

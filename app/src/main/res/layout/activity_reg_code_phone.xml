@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="messenger"
+        android:text="@string/app_name"
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -23,7 +23,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Введите код"
+        android:text="@string/code"
         android:textSize="30sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -33,7 +33,7 @@
         android:id="@+id/main_label"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:text="Мы отправились вам sms с кодом на ваш номер телефона"
+        android:text="@string/codeToSms"
         android:textSize="15sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -51,7 +51,7 @@
         android:textColorHint="#49454f"
         android:layout_gravity="center"
         android:textColor="@color/white"
-        android:hint="введите код с sms" />
+        android:hint="@string/codeFromSms" />
 
     <Button
         android:id="@+id/next_button"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="продолжить"
+        android:text="@string/next"
         android:textStyle="bold" />
 
     <Button
@@ -69,6 +69,6 @@
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:text="отмена" />
+        android:text="@string/cancellation"/>
 
 </LinearLayout>

@@ -2,6 +2,8 @@ package com.example.myapplication_2
 
 import android.os.Bundle
 import android.renderscript.ScriptGroup
+import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -12,8 +14,10 @@ import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
 import com.mikepenz.materialdrawer.DrawerBuilder
+import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 
 class MainLayoutTest : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainLayoutTestBinding
@@ -45,7 +49,7 @@ class MainLayoutTest : AppCompatActivity() {
     }
 
     private fun createDrawer() {
-        mDraver = DrawerBuilder()
+        mDraver =  DrawerBuilder()
             .withActivity(this)
             .withToolbar(mToolBar)
             .withActionBarDrawerToggle(true)
@@ -53,11 +57,75 @@ class MainLayoutTest : AppCompatActivity() {
             .withAccountHeader(mHeader)
             .addDrawerItems(
                 PrimaryDrawerItem().withIdentifier(100)
+                    .withSelectable(false)
                     .withIconTintingEnabled(true)
-                    .withName("штука тестовая")
+                    .withName(getString(R.string.MyProfile))
                     .withSelected(false)
-            )
-            .build()
+                    .withIcon(R.drawable.sticker),
+
+                PrimaryDrawerItem().withIdentifier(101)
+                    .withSelectable(false)
+                    .withIconTintingEnabled(true)
+                    .withName(getString(R.string.secondInBar))
+                    .withSelected(false)
+                    .withIcon(R.drawable.sticker),
+
+                DividerDrawerItem(),
+
+                PrimaryDrawerItem().withIdentifier(102)
+                    .withSelectable(false)
+                    .withIconTintingEnabled(true)
+                    .withName(getString(R.string.CreateGroup))
+                    .withSelected(false)
+                    .withIcon(R.drawable.sticker),
+
+                PrimaryDrawerItem().withIdentifier(103)
+                    .withSelectable(false)
+                    .withIconTintingEnabled(true)
+                    .withName(getString(R.string.createChat))
+                    .withSelected(false)
+                    .withIcon(R.drawable.sticker),
+
+                PrimaryDrawerItem().withIdentifier(104)
+                    .withSelectable(false)
+                    .withIconTintingEnabled(true)
+                    .withName(getString(R.string.contacts))
+                    .withSelected(false)
+                    .withIcon(R.drawable.sticker),
+
+                PrimaryDrawerItem().withIdentifier(105)
+                    .withSelectable(false)
+                    .withIconTintingEnabled(true)
+                    .withName(getString(R.string.calls))
+                    .withSelected(false)
+                    .withIcon(R.drawable.sticker),
+
+                PrimaryDrawerItem().withIdentifier(106)
+                    .withSelectable(false)
+                    .withIconTintingEnabled(true)
+                    .withName(getString(R.string.favourites))
+                    .withSelected(false)
+                    .withIcon(R.drawable.sticker),
+
+                PrimaryDrawerItem().withIdentifier(107)
+                    .withSelectable(false)
+                    .withIconTintingEnabled(true)
+                    .withName(getString(R.string.settings))
+                    .withSelected(false)
+                    .withIcon(R.drawable.sticker)
+
+            ).withOnDrawerItemClickListener(object :Drawer.OnDrawerItemClickListener{
+                override fun onItemClick(
+                    view: View?,
+                    position: Int,
+                    drawerItem: IDrawerItem<*>
+                ): Boolean {
+                    Toast.makeText(applicationContext, position.toString(), Toast.LENGTH_SHORT).show()
+                    return false
+                }
+
+            }).build()
+
     }
 
     private fun initFunc() {
@@ -70,7 +138,7 @@ class MainLayoutTest : AppCompatActivity() {
             .withActivity(this)
             .withHeaderBackground(R.drawable.header)
             .addProfiles(
-                ProfileDrawerItem().withName("where бэк")
+                ProfileDrawerItem().withName("всё будет")
                     .withEmail("+79021202616")
             )
             .build()
