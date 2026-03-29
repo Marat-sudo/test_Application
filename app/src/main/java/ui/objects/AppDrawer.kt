@@ -37,53 +37,54 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
             .withAccountHeader(mHeader)
             .addDrawerItems(
                 PrimaryDrawerItem().withIdentifier(101)
+                    .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(chatActivity.getString(R.string.MyProfile))
-                    .withSelected(false)
                     .withIcon(R.drawable.sticker),
 
                 PrimaryDrawerItem().withIdentifier(102)
+                    .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(chatActivity.getString(R.string.secondInBar))
-                    .withSelected(false)
                     .withIcon(R.drawable.sticker),
 
                 DividerDrawerItem(),
 
                 PrimaryDrawerItem().withIdentifier(104)
+                    .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(chatActivity.getString(R.string.CreateGroup))
-                    .withSelected(false)
                     .withIcon(R.drawable.sticker),
 
                 PrimaryDrawerItem().withIdentifier(105)
+                    .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(chatActivity.getString(R.string.createChat))
-                    .withSelected(false)
                     .withIcon(R.drawable.sticker),
 
                 PrimaryDrawerItem().withIdentifier(106)
+                    .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(chatActivity.getString(R.string.contacts))
-                    .withSelected(false)
                     .withIcon(R.drawable.sticker),
 
                 PrimaryDrawerItem().withIdentifier(107)
+                    .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(chatActivity.getString(R.string.calls))
-                    .withSelected(false)
                     .withIcon(R.drawable.sticker),
 
                 PrimaryDrawerItem().withIdentifier(108)
+                    .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(chatActivity.getString(R.string.favourites))
-                    .withSelected(false)
+                    //.withSelected(false)
                     .withIcon(R.drawable.sticker),
 
                 PrimaryDrawerItem().withIdentifier(109)
+                    .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(chatActivity.getString(R.string.settings))
-                    .withSelected(false)
                     .withIcon(R.drawable.sticker)
 
             ).withOnDrawerItemClickListener(object :Drawer.OnDrawerItemClickListener{
@@ -92,7 +93,7 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
                     position: Int,
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
-                    Toast.makeText(applicationContext, position.toString(), Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(applicationContext, position.toString(), Toast.LENGTH_SHORT).show()
                     when (position) {
                         9 -> chatActivity. supportFragmentManager.beginTransaction()
                             .addToBackStack(null)

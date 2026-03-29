@@ -39,6 +39,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.circleimageview)
+    
+
     implementation(libs.materialdrawer)
 
     implementation (libs.androidx.recyclerview)

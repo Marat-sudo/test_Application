@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         bl.setOnClickListener {
-            val intent = Intent(this, MainLayoutTest::class.java)
+            val intent = Intent(this, MainChatActivity::class.java)
             startActivity(intent)
         }
 

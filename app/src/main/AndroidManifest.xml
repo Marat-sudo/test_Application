@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication_2">
         <activity
-            android:name=".MainLayoutTest"
+            android:name=".MainChatActivity"
             android:exported="false" />
         <activity
             android:name=".Register_user_last"

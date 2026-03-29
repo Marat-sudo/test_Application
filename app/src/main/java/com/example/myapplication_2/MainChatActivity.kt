@@ -12,7 +12,7 @@ import ui.fragments.ChatFragment
 import ui.objects.AppDrawer
 
 
-class MainLayoutTest : AppCompatActivity() {
+class MainChatActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainLayoutTestBinding
     private lateinit var appDrawer: AppDrawer
     private lateinit var mToolBar: Toolbar
