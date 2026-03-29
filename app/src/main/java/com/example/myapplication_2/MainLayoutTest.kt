@@ -18,6 +18,7 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
+import ui.ChatFragment
 
 class MainLayoutTest : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainLayoutTestBinding
@@ -130,7 +131,10 @@ class MainLayoutTest : AppCompatActivity() {
 
     private fun initFunc() {
         setSupportActionBar(mToolBar)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.dataContainer, ChatFragment()).commit()
         createHeader()
+        createDrawer()
     }
 
     private fun createHeader() {
