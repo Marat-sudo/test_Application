@@ -8,6 +8,7 @@
     tools:context="ui.fragments.SettingsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/settingHeader"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/colorPrimary"
@@ -16,13 +17,54 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:id="@+id/settingUserPhoto"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:src="@drawable/sticker"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
             app:civ_border_color="@color/design_default_color_primary_dark"
-            app:civ_border_width="2dp"
-            tools:ignore="MissingConstraints" />
+            app:civ_border_width="2dp" />
+        
+        <TextView
+            android:id="@+id/settingUserFirstName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/accent"
+            android:textSize="16sp"
+            android:text="testing"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/settingUserPhoto"
+            app:layout_constraintStart_toEndOf="@id/settingUserPhoto"/>
+
+        <TextView
+            android:id="@+id/settingUserPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/accent"
+            android:textSize="14sp"
+            android:text="+7 xxx xxx xx xx"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/settingUserFirstName"
+            app:layout_constraintStart_toEndOf="@id/settingUserPhoto"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <!-- тут не жалуется на @-->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/material_dynamic_primary40"
+            android:textSize="12sp"
+            android:text="userName"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toEndOf="@id/settingUserPhoto"
+            app:layout_constraintTop_toBottomOf="@id/settingUserPhone"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
