@@ -35,6 +35,9 @@
     <string name="setting_label_phone_number">нажмите, чтобы изменить номер телефона</string>
     <string name="setting_label_login">Имя пользователя</string>
     <string name="setting_bio_about_you">О себе</string>
+    <string name="setting_menu_change_photo">изменить фотографию</string>
+    <string name="setting_menu_exit">выход</string>
+    <string name="setting_menu_change_info">изменить информацию</string>
 
 
 </resources>

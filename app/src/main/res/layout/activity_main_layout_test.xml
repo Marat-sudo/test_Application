@@ -7,11 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".MainChatActivity">
 
+    <!-- для отображения текста в ... -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/mainToolBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+
+        app:titleTextColor="@color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         style="@style/mainToolBar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

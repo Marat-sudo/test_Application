@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:icon="@drawable/sticker"
+        app:showAsAction="ifRoom"
+        android:title="">
+
+        <menu>
+
+            <item android:id="@+id/setting_menu_change_info"
+                android:title="@string/setting_menu_change_info"
+                android:icon="@drawable/baseline_directions_run_24"
+                app:showAsAction="never"/>
+
+            <item android:id="@+id/setting_menu_change_photo"
+                android:title="@string/setting_menu_change_photo"
+                android:icon="@drawable/baseline_directions_run_24"
+                app:showAsAction="never"/>
+
+            <item android:id="@+id/setting_menu_exit"
+                android:title="@string/setting_menu_exit"
+                android:icon="@drawable/baseline_directions_run_24"
+                app:showAsAction="never"/>
+
+
+
+        </menu>
+
+    </item>
+
 
 </menu>
