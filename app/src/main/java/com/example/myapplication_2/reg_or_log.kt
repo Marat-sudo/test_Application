@@ -28,7 +28,7 @@ class reg_or_log : AppCompatActivity() {
 
         buttonReg.setOnClickListener {
             val timStatus = true
-            val log = userPhone.text.toString().trim()
+            val log = (userPhone.text.toString()).replace("\\s".toRegex(), "")
             val regex = """\+\d{11}""".toRegex()
             if (log != "" && timStatus && log.matches(regex)){
                 val intent = Intent(this, RegActivityCodePhone::class.java)
