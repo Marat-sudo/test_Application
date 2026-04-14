@@ -21,7 +21,7 @@
             android:name=".RegActivityCodePhone"
             android:exported="false" />
         <activity
-            android:name=".reg_or_log"
+            android:name=".RegOrLog"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

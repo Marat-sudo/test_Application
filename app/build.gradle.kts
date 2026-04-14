@@ -10,6 +10,8 @@ android {
         version = release(36)
     }
 
+
+
     defaultConfig {
         applicationId = "com.example.myapplication_2"
         minSdk = 24

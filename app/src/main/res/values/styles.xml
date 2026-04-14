@@ -39,4 +39,19 @@
         <item name="android:layout_height">50dp</item>
         <item name="android:background">?attr/colorPrimary</item>
     </style>
+    
+    <style name="editText">
+        Пalle
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/normal_text</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColorHint">@color/md_grey_500</item>
+        <item name="android:padding">@dimen/material_drawer_item_padding</item>
+        <item name="android:layout_margin">@dimen/horizontal_margin</item>
+        <item name="android:inputType">phone</item>
+
+    </style>
+    
 </resources>

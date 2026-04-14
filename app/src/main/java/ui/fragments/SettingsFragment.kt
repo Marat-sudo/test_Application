@@ -11,7 +11,12 @@ import androidx.lifecycle.Lifecycle
 
 import android.os.Bundle
 import android.view.View
+import com.example.myapplication_2.MainChatActivity
 import com.example.myapplication_2.R
+import com.example.myapplication_2.RegOrLog
+import com.example.myapplication_2.Register_user_last
+import com.example.myapplication_2.utilits.replaceActivity
+import com.example.myapplication_2.utilits.replaceFragment
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
@@ -37,18 +42,32 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Обрабатываем нажатия
-                return when (menuItem.itemId) {
-                    R.id.setting_menu_change_info -> true
+                when (menuItem.itemId) {
+                    R.id.setting_menu_change_info -> replaceFragment(ChangeNameFragment())
 
-                    R.id.setting_menu_change_photo -> true
+                    //R.id.setting_menu_change_photo -> pass
 
-                    R.id.setting_menu_exit -> true
+                    R.id.setting_menu_exit -> (activity as MainChatActivity).replaceActivity(RegOrLog())
 
-                    else -> false
+
                 }
+                return true
+
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
         // ^ Важно: передаем viewLifecycleOwner, чтобы меню само удалялось
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.setting_menu_exit -> {
+                (activity as MainChatActivity).replaceActivity(RegOrLog())
+            }
+            R.id.setting_menu_change_info -> replaceFragment(ChangeNameFragment())
+
+        }
+
+        return true
+    }
 }
+

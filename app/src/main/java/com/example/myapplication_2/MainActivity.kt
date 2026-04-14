@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
 
         br.setOnClickListener {
-            val intent = Intent(this, reg_or_log::class.java)
+            val intent = Intent(this, RegOrLog::class.java)
             startActivity(intent)
         }
 
