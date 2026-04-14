@@ -5,6 +5,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
+import com.example.myapplication_2.MainActivity
+import com.example.myapplication_2.MainChatActivity
 import com.example.myapplication_2.R
 import com.mikepenz.iconics.Iconics.applicationContext
 import com.mikepenz.materialdrawer.AccountHeader
@@ -22,11 +25,37 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
                  private val toolbar: Toolbar){
     private lateinit var mDraver: Drawer
     private lateinit var mHeader: AccountHeader
+    private lateinit var mDrawerLayout: DrawerLayout
 
     fun create(){
         createHeader()
         createDrawer()
+        mDrawerLayout = mDraver.drawerLayout
     }
+
+    fun disableDrawer()
+    {
+        mDraver.actionBarDrawerToggle?.isDrawerIndicatorEnabled = false
+        chatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        toolbar.setNavigationOnClickListener {
+            chatActivity.supportFragmentManager.popBackStack()
+        }
+    }
+
+    fun enableDrawer()
+    {
+        chatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        mDraver.actionBarDrawerToggle?.isDrawerIndicatorEnabled = true
+
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED )
+        toolbar.setNavigationOnClickListener {
+            mDraver.openDrawer()
+        }
+
+    }
+
+
 
     private fun createDrawer() {
         DrawerBuilder()

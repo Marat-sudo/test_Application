@@ -14,7 +14,7 @@ import ui.objects.AppDrawer
 
 class MainChatActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainLayoutTestBinding
-    private lateinit var appDrawer: AppDrawer
+    lateinit var mAppDrawer: AppDrawer
     private lateinit var mToolBar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +47,7 @@ class MainChatActivity : AppCompatActivity() {
         setSupportActionBar(mToolBar)
         supportFragmentManager.beginTransaction()
             .replace(R.id.dataContainer, ChatFragment()).commit()
-        appDrawer.create()
+        mAppDrawer.create()
 
     }
 
@@ -55,7 +55,7 @@ class MainChatActivity : AppCompatActivity() {
 
     private fun initFields() {
         mToolBar = mBinding.mainToolBar
-        appDrawer = AppDrawer(this, mToolBar)
+        mAppDrawer = AppDrawer(this, mToolBar)
 
 
     }
