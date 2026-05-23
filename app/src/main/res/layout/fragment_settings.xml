@@ -88,6 +88,8 @@
         android:id="@+id/setting_btn_change_number_phone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintTop_toBottomOf="@+id/setting_text_account"
         style="@style/settingButtons">
 
@@ -117,6 +119,8 @@
         android:id="@+id/setting_btn_change_user_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintTop_toBottomOf="@+id/setting_btn_change_number_phone"
         style="@style/settingButtons">
 
@@ -145,6 +149,8 @@
         android:id="@+id/setting_btn_change_bio"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintTop_toBottomOf="@+id/setting_btn_change_user_name"
         style="@style/settingButtons">
 

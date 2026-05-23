@@ -40,6 +40,7 @@
     <string name="setting_menu_change_info">изменить информацию</string>
     <string name="setting_hint_input_name">имя</string>
     <string name="setting_hit_input_second_name">фамилия</string>
+    <string name="username_hint">имя пользователя</string>
 
 
 </resources>

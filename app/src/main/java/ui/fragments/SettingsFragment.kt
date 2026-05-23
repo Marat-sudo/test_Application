@@ -10,10 +10,11 @@ import androidx.lifecycle.Lifecycle
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication_2.MainChatActivity
 import com.example.myapplication_2.R
 import com.example.myapplication_2.RegOrLog
-import com.example.myapplication_2.Register_user_last
 import com.example.myapplication_2.utilits.replaceActivity
 import com.example.myapplication_2.utilits.replaceFragment
 
@@ -34,7 +35,28 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initMenuHost()
 
+        val phoneNum: ConstraintLayout = view.findViewById(R.id.setting_btn_change_number_phone)
+        val userName: ConstraintLayout = view.findViewById(R.id.setting_btn_change_user_name)
+        val info: ConstraintLayout = view.findViewById(R.id.setting_btn_change_bio)
+
+
+        phoneNum.setOnClickListener {
+
+        }
+
+        userName.setOnClickListener {
+            replaceFragment(ChangeUserNameFragment())
+        }
+
+        info.setOnClickListener {
+            replaceFragment(ChangeInfoFragment())
+        }
+
+    }
+
+    private fun initMenuHost() {
         val menuHost: MenuHost = requireActivity()
 
         // 2. Добавляем провайдер меню
@@ -47,7 +69,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Обрабатываем нажатия
                 when (menuItem.itemId) {
-                    R.id.setting_menu_change_info -> replaceFragment(ChangeNameFragment())
+                    R.id.setting_menu_change_info -> replaceFragment(ChangeInfoFragment())
 
                     //R.id.setting_menu_change_photo -> pass
 
@@ -62,12 +84,13 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         // ^ Важно: передаем viewLifecycleOwner, чтобы меню само удалялось
     }
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.setting_menu_exit -> {
                 (activity as MainChatActivity).replaceActivity(RegOrLog())
             }
-            R.id.setting_menu_change_info -> replaceFragment(ChangeNameFragment())
+            R.id.setting_menu_change_info -> replaceFragment(ChangeInfoFragment())
 
         }
 

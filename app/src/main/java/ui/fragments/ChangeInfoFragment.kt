@@ -5,10 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import com.example.myapplication_2.R
 import androidx.core.view.MenuHost
@@ -18,9 +15,32 @@ import com.example.myapplication_2.MainChatActivity
 import com.example.myapplication_2.utilits.showToast
 
 
-class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
+class ChangeInfoFragment : BaseFragment(R.layout.fragment_change_info) {
     override fun onResume() {
         super.onResume()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (activity as MainChatActivity).mAppDrawer.disableDrawer()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (activity as MainChatActivity).mAppDrawer.enableDrawer()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        (activity as MainChatActivity).menuInflater.inflate(R.menu.settings_menu_confirm, menu)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.settings_confirm_change -> change()
+        }
+
+        return true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,17 +69,13 @@ class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
         // 3. Указываем владельца жизненного цикла и состояние
     }
 
-
-
-
-    override fun change() {
+    private fun change() {
         val name = requireView().findViewById<EditText>(R.id.settings_input_name)
         val secondName = requireView().findViewById<EditText>(R.id.settings_input_surname)
 
         if (name.text.isEmpty()) {
-            parentFragmentManager.popBackStack()
-        }
-        else {
+            showToast("error")
+        } else {
             val fullName: String = "${name.text} ${secondName.text}"
             showToast(fullName)
             parentFragmentManager.popBackStack()
