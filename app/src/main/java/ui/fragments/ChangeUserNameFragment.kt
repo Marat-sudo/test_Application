@@ -19,14 +19,12 @@ class ChangeUserNameFragment : BaseChangeFragment(R.layout.fragment_change_usern
     }
 
     override fun change() {
-        val name = requireView().findViewById<EditText>(R.id.settings_input_name)
-        val secondName = requireView().findViewById<EditText>(R.id.settings_input_surname)
-
+        val name = requireView().findViewById<EditText>(R.id.setting_input_username)
         if (name.text.isEmpty()) {
             parentFragmentManager.popBackStack()
         }
         else {
-            val fullName: String = "${name.text} ${secondName.text}"
+            val fullName: String = "${name.text}"
             showToast(fullName)
             parentFragmentManager.popBackStack()
         }
