@@ -7,7 +7,6 @@ import android.view.MenuItem
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
-// Обязательно замените com.yourpackage на реальный ID вашего приложения!
 
 import android.os.Bundle
 import android.view.View
@@ -23,6 +22,11 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
     override fun onResume() {
         super.onResume()
+
+    }
+
+    private fun initFields()
+    {
 
     }
 

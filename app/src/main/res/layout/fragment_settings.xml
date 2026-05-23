@@ -57,6 +57,7 @@
             app:layout_constraintEnd_toEndOf="parent"/>
         <!-- тут не жалуется на @-->
         <TextView
+            android:id="@+id/settings_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/material_dynamic_primary40"
@@ -74,7 +75,7 @@
         android:id="@+id/setting_text_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/testing"
+        tools:text="@string/testing"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         android:textSize="@dimen/small_text_2"
