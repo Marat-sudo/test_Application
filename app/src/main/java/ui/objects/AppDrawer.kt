@@ -18,7 +18,8 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
-import ui.fragments.SettingsFragment
+
+import ui.fragments.SettingsFragmnt
 
 
 class AppDrawer (private val chatActivity: AppCompatActivity,
@@ -126,7 +127,7 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
                     when (position) {
                         9 -> chatActivity. supportFragmentManager.beginTransaction()
                             .addToBackStack(null)
-                            .replace(R.id.dataContainer, SettingsFragment()).commit()
+                            .replace(R.id.dataContainer, SettingsFragmnt()).commit()
                     }
 
                     return false

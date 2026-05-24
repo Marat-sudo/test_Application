@@ -2,6 +2,7 @@ package com.example.myapplication_2
 
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -30,13 +31,28 @@ class MainChatActivity : AppCompatActivity() {
         mBinding = ActivityMainLayoutTestBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
+        initFields()
+        initFunc()
+
+        if (savedInstanceState == null) {
+            // Создаем шторку
+            mAppDrawer.create()
+
+            // Загружаем стартовый фрагмент чата
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.dataContainer, ChatFragment())
+                .commit()
+        }
+//        Toast.makeText(this, "create", Toast.LENGTH_SHORT).show();
+
 
     }
 
     override fun onStart() {
         super.onStart()
-        initFields()
-        initFunc()
+//        Toast.makeText(this, "start.", Toast.LENGTH_SHORT).show();
+
+
 
     }
 

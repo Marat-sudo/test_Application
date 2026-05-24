@@ -13,6 +13,7 @@
         android:theme="@style/Theme.MyApplication_2">
         <activity
             android:name=".MainChatActivity"
+            android:launchMode="standard"
             android:exported="false" />
         <activity
             android:name=".Register_user_last"
@@ -23,9 +24,17 @@
         <activity
             android:name=".RegOrLog"
             android:exported="false" />
+
+        <activity
+            android:name="com.canhub.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"
+            />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
