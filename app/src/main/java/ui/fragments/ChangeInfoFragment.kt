@@ -26,7 +26,8 @@ class ChangeInfoFragment : BaseChangeFragment(R.layout.fragment_change_info) {
         val secondName = requireView().findViewById<EditText>(R.id.settings_input_surname)
 
         if (name.text.isEmpty()) {
-            showToast("error")
+            parentFragmentManager.popBackStack()
+
         } else {
             val fullName: String = "${name.text} ${secondName.text}"
             showToast(fullName)

@@ -1,6 +1,7 @@
 package ui.fragments
 
 
+import android.graphics.Bitmap
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -17,6 +18,13 @@ import com.example.myapplication_2.R
 import com.example.myapplication_2.RegOrLog
 import com.example.myapplication_2.utilits.replaceActivity
 import com.example.myapplication_2.utilits.replaceFragment
+
+
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageOptions
+import com.canhub.cropper.CropImageView
+import android.graphics.Color
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
@@ -41,6 +49,8 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         val userName: ConstraintLayout = view.findViewById(R.id.setting_btn_change_user_name)
         val info: ConstraintLayout = view.findViewById(R.id.setting_btn_change_bio)
 
+        val photo: de.hdodenhof.circleimageview.CircleImageView = view.findViewById(R.id.setting_change_photo)
+
 
         phoneNum.setOnClickListener {
 
@@ -54,6 +64,74 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
             replaceFragment(ChangeInfoFragment())
         }
 
+        photo.setOnClickListener {
+            changePhoto()
+        }
+
+    }
+
+
+
+    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
+        if (result.isSuccessful) {
+            // Успешно! Получаем URI обрезанного изображения
+            val uriContent = result.uriContent
+            // val croppedImageFilePath = result.getUriFilePath(this)
+
+            // Например, отображаем в ImageView или отправляем на сервер:
+            // binding.myImageView.setImageURI(uriContent)
+        } else {
+            // An error occurred.
+            val exception = result.error
+            // Handle the error.
+        }
+    }
+
+    private fun startCrop() {
+
+        // Start cropping activity for a pre-acquired image with custom settings.
+        cropImage.launch(
+            CropImageContractOptions(
+                uri = null,
+                cropImageOptions = CropImageOptions(
+                    guidelines = CropImageView.Guidelines.ON,
+                    outputCompressFormat = Bitmap.CompressFormat.PNG
+                )
+            )
+        )
+        }
+
+
+    private fun changePhoto() {
+        cropImage.launch(
+            CropImageContractOptions(
+                uri = null, // null — библиотека сама откроет выбор: Камера / Галерея
+                cropImageOptions = CropImageOptions().apply {
+                    // Включаем сетку-направляющие (как у вас в примере)
+
+
+                    cropShape = CropImageView.CropShape.OVAL
+                    fixAspectRatio = true
+                    aspectRatioX = 1
+                    aspectRatioY = 1
+                    guidelines = CropImageView.Guidelines.OFF
+                    allowFlipping=true
+                    allowRotation=true
+
+
+
+                    activityBackgroundColor = Color.BLACK
+
+
+                    showProgressBar=true
+                    activityTitle = "Редактирование"         // Заголовок на верхней панели
+                    activityMenuIconColor = Color.WHITE     // Цвет иконок в меню
+                    toolbarBackButtonColor = Color.WHITE   // Цвет стрелки "Назад"
+                    toolbarColor = Color.WHITE              // Цвет самого Тулбара (верхней панели)
+
+                }
+            )
+        )
     }
 
     private fun initMenuHost() {
