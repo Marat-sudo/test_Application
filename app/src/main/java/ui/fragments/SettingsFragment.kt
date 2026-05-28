@@ -26,10 +26,27 @@ import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageOptions
 import com.canhub.cropper.CropImageView
 import android.graphics.Color
+import android.net.Uri
 import com.canhub.cropper.CropImageActivity
+import models.UserCache
+import java.io.File
+import java.io.FileOutputStream
+import androidx.core.net.toUri
+import com.bumptech.glide.Glide
+import com.bumptech.glide.signature.ObjectKey
 
 
 class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
+    lateinit var mBinding: de.hdodenhof.circleimageview.CircleImageView
+
+    lateinit var phoneNumView: TextView
+
+    lateinit var userNameView: TextView
+
+    lateinit var userBioView: TextView
+
+    lateinit var userFullName: TextView
+
 
     private val cropImage = registerForActivityResult(CropImageContract()) { result ->
         if (result.isSuccessful) {
@@ -37,12 +54,50 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
             val uriContent = result.uriContent
             // val croppedImageFilePath = result.getUriFilePath(this)
 
+
+            savePhotoUrl(uriContent.toString())
             // Например, отображаем в ImageView или отправляем на сервер:
             // binding.myImageView.setImageURI(uriContent)
         } else {
             // An error occurred.
             val exception = result.error
             // Handle the error.
+        }
+    }
+
+    private fun savePhotoUrl(uriString: String) {
+        try {
+            val sourceUri = uriString.toUri()
+
+            // Открываем поток чтения из временного файла библиотеки
+            val inputStream = requireContext().contentResolver.openInputStream(sourceUri)
+
+            // Создаем постоянный файл в локальной папке приложения
+            val destinationFile = File(requireContext().filesDir, "user_profile_avatar.jpg")
+            val outputStream = FileOutputStream(destinationFile)
+
+            // Копируем байты из временного файла в постоянный
+            inputStream?.use { input ->
+                outputStream.use { output ->
+                    input.copyTo(output)
+                }
+            }
+
+            // ВОТ ОН — ваш постоянный локальный URL/путь к файлу
+            val permanentPhotoPath = destinationFile.absolutePath
+
+            UserCache.currentUser?.photoUrl = permanentPhotoPath
+
+            setPhoto()
+
+
+            // Теперь записываем permanentPhotoPath в вашу базу данных (SQLite / Room)
+            //savePathToDatabase(permanentPhotoPath)
+
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+
         }
     }
 
@@ -63,12 +118,29 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
         super.onViewCreated(view, savedInstanceState)
         initMenuHost()
 
+
+
+        mBinding = view.findViewById(R.id.settingUserPhoto)
+        phoneNumView = view.findViewById(R.id.setting_phone_number)
+        userNameView = view.findViewById(R.id.setting_user_name)
+        userBioView = view.findViewById(R.id.setting_bio)
+        userFullName = view.findViewById(R.id.setting_user_full_name)
+
+        /*
+    setting_phone_number
+    setting_user_name
+    setting_bio*/
+
         val phoneNum: ConstraintLayout = view.findViewById(R.id.setting_btn_change_number_phone)
         val userName: ConstraintLayout = view.findViewById(R.id.setting_btn_change_user_name)
         val info: ConstraintLayout = view.findViewById(R.id.setting_btn_change_bio)
 
+
+
         val photo: de.hdodenhof.circleimageview.CircleImageView = view.findViewById(R.id.setting_change_photo)
 
+        setPhoto()
+        initUserInfo()
 
         phoneNum.setOnClickListener {
 
@@ -76,10 +148,12 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
 
         userName.setOnClickListener {
             replaceFragment(ChangeUserNameFragment())
+            initUserInfo()
         }
 
         info.setOnClickListener {
             replaceFragment(ChangeInfoFragment())
+            initUserInfo()
         }
 
 
@@ -91,8 +165,39 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
 
     }
 
+    private fun initView(view: View){
 
 
+    }
+
+    private fun initUserInfo(){
+        /*
+        setting_phone_number
+        setting_user_name
+        setting_bio*/
+        val fullName: String = UserCache.currentUser?.firstName + " " + UserCache.currentUser?.lastName
+        userFullName.text = fullName
+        phoneNumView.text = UserCache.currentUser?.phone
+        userNameView.text = UserCache.currentUser?.userName
+        userBioView.text = UserCache.currentUser?.bio
+
+    }
+
+    private fun setPhoto() {
+
+        val urlPhoto = UserCache.currentUser?.photoUrl
+
+        if (urlPhoto != null && urlPhoto.isNotEmpty()) {
+
+            // Glide сам поймет, что это локальный путь, проверит файл и загрузит его
+            Glide.with(this) // передаем контекст фрагмента или активити
+                .load(urlPhoto)
+                .signature(ObjectKey(File(urlPhoto).lastModified()))
+                .placeholder(R.drawable.sticker) // дефолтная картинка, пока грузится фото
+                .error(R.drawable.sticker)       // картинка, если произошла ошибка
+                .into(mBinding) // ваш CircleImageView
+        }
+    }
 
 
     private fun startCrop() {
@@ -183,5 +288,10 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
 
         return true
     }
+
+
+
 }
+
+
 

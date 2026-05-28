@@ -11,6 +11,7 @@ import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import com.example.myapplication_2.R
 import com.example.myapplication_2.utilits.showToast
+import models.UserCache
 
 class ChangeUserNameFragment : BaseChangeFragment(R.layout.fragment_change_username) {
 
@@ -19,13 +20,15 @@ class ChangeUserNameFragment : BaseChangeFragment(R.layout.fragment_change_usern
     }
 
     override fun change() {
+        UserCache.currentUser
         val name = requireView().findViewById<EditText>(R.id.setting_input_username)
         if (name.text.isEmpty()) {
             parentFragmentManager.popBackStack()
         }
         else {
-            val fullName: String = "${name.text}"
-            showToast(fullName)
+            val userName: String = "${name.text}"
+            showToast(userName)
+            UserCache.currentUser?.userName = userName
             parentFragmentManager.popBackStack()
         }
     }

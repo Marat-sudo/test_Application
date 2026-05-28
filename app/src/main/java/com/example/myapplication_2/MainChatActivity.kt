@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.myapplication_2.databinding.ActivityMainLayoutTestBinding
+import models.UserCache
 import ui.fragments.ChatFragment
 import ui.objects.AppDrawer
 
@@ -30,6 +31,8 @@ class MainChatActivity : AppCompatActivity() {
 
         mBinding = ActivityMainLayoutTestBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+
+
 
         initFields()
         initFunc()

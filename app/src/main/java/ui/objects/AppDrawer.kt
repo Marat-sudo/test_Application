@@ -18,6 +18,7 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
+import models.UserCache
 
 import ui.fragments.SettingsFragmnt
 
@@ -27,6 +28,10 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
     private lateinit var mDraver: Drawer
     private lateinit var mHeader: AccountHeader
     private lateinit var mDrawerLayout: DrawerLayout
+
+    private lateinit var mCurrentProfile: ProfileDrawerItem
+
+
 
     fun create(){
         createHeader()
@@ -140,15 +145,38 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
 
 
     private fun createHeader() {
+        val path = "C:\\Users\\user\\AndroidStudioProjects\\MyApplication_2\\app\\src\\main\\res\\drawable\\img.png"
+        val fullName: String = (UserCache.currentUser?.firstName + " " + UserCache.currentUser?.lastName)
+        // TODO Доделать Icon для header
+        mCurrentProfile = ProfileDrawerItem()
+//            .withIcon(UserCache.currentUser?.photoUrl ?: path)
+            .withName(fullName)
+            .withEmail(UserCache.currentUser?.phone)
+            .withIdentifier(200)
+
+
         mHeader = AccountHeaderBuilder()
             .withActivity(chatActivity)
             .withHeaderBackground(R.drawable.header)
             .addProfiles(
-                ProfileDrawerItem().withName("всё будет")
-                    .withEmail("+79021202616")
+                mCurrentProfile
             )
             .build()
 
 
     }
+
+    private fun updateHeader(){
+        val path = "C:\\Users\\user\\AndroidStudioProjects\\MyApplication_2\\app\\src\\main\\res\\drawable\\img.png"
+        val fullName: String = (UserCache.currentUser?.firstName + " " + UserCache.currentUser?.lastName)
+
+        mCurrentProfile = ProfileDrawerItem()
+//            .withIcon(UserCache.currentUser?.photoUrl ?: path)
+            .withName(fullName)
+            .withEmail(UserCache.currentUser?.phone)
+        mHeader.updateProfile(mCurrentProfile)
+    }
+
 }
+
+

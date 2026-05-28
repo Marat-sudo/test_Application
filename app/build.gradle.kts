@@ -41,6 +41,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.glide)
+    implementation(libs.picasso)
+
     implementation(libs.android.image.cropper)
 
     implementation(libs.circleimageview)
