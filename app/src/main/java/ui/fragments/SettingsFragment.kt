@@ -27,6 +27,8 @@ import com.canhub.cropper.CropImageOptions
 import com.canhub.cropper.CropImageView
 import android.graphics.Color
 import android.net.Uri
+import android.util.Log
+import android.widget.Toast
 import com.canhub.cropper.CropImageActivity
 import models.UserCache
 import java.io.File
@@ -37,6 +39,7 @@ import com.bumptech.glide.signature.ObjectKey
 
 
 class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
+    private val TAG = "M_DEBUG"
     lateinit var mBinding: de.hdodenhof.circleimageview.CircleImageView
 
     lateinit var phoneNumView: TextView
@@ -58,7 +61,8 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
             savePhotoUrl(uriContent.toString())
             // Например, отображаем в ImageView или отправляем на сервер:
             // binding.myImageView.setImageURI(uriContent)
-        } else {
+        }
+        else {
             // An error occurred.
             val exception = result.error
             // Handle the error.
@@ -88,7 +92,11 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
 
             UserCache.currentUser?.photoUrl = permanentPhotoPath
 
+            Log.d(TAG, "------------------------------")
+            Log.d(TAG, permanentPhotoPath)
+
             setPhoto()
+            (activity as MainChatActivity).mAppDrawer.updateHeader()
 
 
             // Теперь записываем permanentPhotoPath в вашу базу данных (SQLite / Room)

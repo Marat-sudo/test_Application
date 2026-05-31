@@ -1,5 +1,7 @@
 package models
 
+import com.example.myapplication_2.R
+
 data class User (
     val id: String = "",
     var userName: String = "",
@@ -21,6 +23,6 @@ object UserCache {
         firstName = "m",
         lastName = "n",
         phone = "+7 000 000 00 00",
-        photoUrl = "C:\\Users\\user\\AndroidStudioProjects\\MyApplication_2\\app\\src\\main\\res\\drawable\\img.png"
+        photoUrl = "res/drawable/img.png"
     )
 }

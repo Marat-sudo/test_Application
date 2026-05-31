@@ -33,6 +33,7 @@ class MainChatActivity : AppCompatActivity() {
         setContentView(mBinding.root)
 
 
+        Toast.makeText(this, UserCache.currentUser?.photoUrl, Toast.LENGTH_LONG).show();
 
         initFields()
         initFunc()
@@ -53,7 +54,7 @@ class MainChatActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-//        Toast.makeText(this, "start.", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "start.", Toast.LENGTH_SHORT).show();
 
 
 

@@ -1,14 +1,21 @@
 package ui.objects
 
 
+import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.example.myapplication_2.MainActivity
 import com.example.myapplication_2.MainChatActivity
 import com.example.myapplication_2.R
+import com.example.myapplication_2.utilits.downloadAndSetImage
 import com.mikepenz.iconics.Iconics.applicationContext
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -18,6 +25,8 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
+import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader
+import com.mikepenz.materialdrawer.util.DrawerImageLoader
 import models.UserCache
 
 import ui.fragments.SettingsFragmnt
@@ -25,6 +34,8 @@ import ui.fragments.SettingsFragmnt
 
 class AppDrawer (private val chatActivity: AppCompatActivity,
                  private val toolbar: Toolbar){
+
+    private val TAG = "M_DEBUG"
     private lateinit var mDraver: Drawer
     private lateinit var mHeader: AccountHeader
     private lateinit var mDrawerLayout: DrawerLayout
@@ -34,6 +45,7 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
 
 
     fun create(){
+        initLoader()
         createHeader()
         createDrawer()
         mDrawerLayout = mDraver.drawerLayout
@@ -145,13 +157,19 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
 
 
     private fun createHeader() {
-        val path = "C:\\Users\\user\\AndroidStudioProjects\\MyApplication_2\\app\\src\\main\\res\\drawable\\img.png"
+        val p  = "app/src/main/res/drawable/m.jpg"
+        val path = UserCache.currentUser?.photoUrl
+
+
         val fullName: String = (UserCache.currentUser?.firstName + " " + UserCache.currentUser?.lastName)
-        // TODO Доделать Icon для header
+        /* TODO Доделать Icon для header
+        * проблемы загрузки фото из базового "app/src/main/res/drawable/m.jpg", но
+        * если путь через кэш то всё работает
+        * */
         mCurrentProfile = ProfileDrawerItem()
-//            .withIcon(UserCache.currentUser?.photoUrl ?: path)
             .withName(fullName)
             .withEmail(UserCache.currentUser?.phone)
+            //.withIcon(path!!)
             .withIdentifier(200)
 
 
@@ -166,17 +184,32 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
 
     }
 
-    private fun updateHeader(){
-        val path = "C:\\Users\\user\\AndroidStudioProjects\\MyApplication_2\\app\\src\\main\\res\\drawable\\img.png"
+    fun updateHeader(){
+        val path = "C:\\Users\\user\\AndroidStudioProjects\\MyApplication_2\\app\\src\\main\\res\\drawable\\m.jpg"
         val fullName: String = (UserCache.currentUser?.firstName + " " + UserCache.currentUser?.lastName)
 
-        mCurrentProfile = ProfileDrawerItem()
-//            .withIcon(UserCache.currentUser?.photoUrl ?: path)
+        mCurrentProfile
             .withName(fullName)
             .withEmail(UserCache.currentUser?.phone)
+            .withIcon(UserCache.currentUser?.photoUrl ?: path)
+
         mHeader.updateProfile(mCurrentProfile)
     }
 
+    private fun initLoader(){
+        DrawerImageLoader.init(object: AbstractDrawerImageLoader(){
+            override fun set(
+                imageView: ImageView,
+                uri: Uri,
+                placeholder: Drawable
+            ) {
+                super.set(imageView, uri, placeholder)
+                imageView.downloadAndSetImage(uri.toString())
+            }
+        })
+    }
 }
+
+
 
 
