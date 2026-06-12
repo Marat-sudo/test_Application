@@ -1,18 +1,9 @@
 package ui.fragments
 
 
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.os.Bundle
-import android.view.View
+
 import android.widget.EditText
 import com.example.myapplication_2.R
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
-import androidx.lifecycle.Lifecycle
-import com.example.myapplication_2.MainChatActivity
-import com.example.myapplication_2.utilits.showToast
 import models.UserCache
 
 

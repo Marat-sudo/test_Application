@@ -13,21 +13,22 @@ import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import com.example.myapplication_2.MainChatActivity
 import com.example.myapplication_2.R
+import com.example.myapplication_2.utilits.APP_ACTIVITY
 
 
 open class BaseChangeFragment(val layout: Int): Fragment(layout)  {
     override fun onStart() {
         super.onStart()
-        (activity as MainChatActivity).mAppDrawer.disableDrawer()
+        APP_ACTIVITY.mAppDrawer.disableDrawer()
     }
 
     override fun onStop() {
         super.onStop()
-        (activity as MainChatActivity).mAppDrawer.enableDrawer()
+        APP_ACTIVITY.mAppDrawer.enableDrawer()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        (activity as MainChatActivity).menuInflater.inflate(R.menu.settings_menu_confirm, menu)
+        APP_ACTIVITY.menuInflater.inflate(R.menu.settings_menu_confirm, menu)
 
     }
 

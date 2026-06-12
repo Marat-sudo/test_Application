@@ -13,6 +13,8 @@ import com.example.myapplication_2.R
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import models.UserCache
+import ui.fragments.BaseFragment
+import ui.fragments.SettingsFragmnt
 import java.io.File
 import java.io.FileOutputStream
 
@@ -24,6 +26,23 @@ fun AppCompatActivity.replaceActivity(activity: AppCompatActivity) {
     val intent = Intent(this, activity::class.java)
     startActivity(intent)
     this.finish()
+}
+
+fun AppCompatActivity.replaceFragment(fragment: Fragment, addStack:Boolean = true){
+    /* Функция расширения для AppCompatActivity, позволяет устанавливать фрагменты */
+    if (addStack){
+        supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.dataContainer,
+                fragment
+            ).commit()
+    } else {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.dataContainer,
+                fragment
+            ).commit()
+    }
+
 }
 
 fun Fragment.replaceFragment(fragment: Fragment) {

@@ -16,7 +16,11 @@
 
         app:titleTextColor="@color/white"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        style="@style/mainToolBar" />
+        style="@style/mainToolBar" >
+        <include layout="@layout/toolbar_info"
+            android:id="@+id/toolbar_info"
+            android:visibility="gone"/>
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

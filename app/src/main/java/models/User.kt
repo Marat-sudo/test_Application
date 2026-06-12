@@ -1,6 +1,7 @@
 package models
 
 import com.example.myapplication_2.R
+import com.example.myapplication_2.utilits.AppStates
 
 data class User (
     val id: String = "",
@@ -10,7 +11,8 @@ data class User (
     var lastName: String= "",
     var status: String = "",
     var phone: String = "",
-    var photoUrl: String = ""
+    var photoUrl: String = "",
+    var state: String =""
 )
 
 object UserCache {
@@ -23,6 +25,7 @@ object UserCache {
         firstName = "m",
         lastName = "n",
         phone = "+7 000 000 00 00",
-        photoUrl = "res/drawable/img.png"
+        photoUrl = "res/drawable/img.png",
+        state = AppStates.OFFLINE.state
     )
 }

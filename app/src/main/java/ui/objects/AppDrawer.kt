@@ -15,7 +15,10 @@ import androidx.fragment.app.Fragment
 import com.example.myapplication_2.MainActivity
 import com.example.myapplication_2.MainChatActivity
 import com.example.myapplication_2.R
+import com.example.myapplication_2.utilits.APP_ACTIVITY
 import com.example.myapplication_2.utilits.downloadAndSetImage
+import com.example.myapplication_2.utilits.replaceActivity
+import com.example.myapplication_2.utilits.replaceFragment
 import com.mikepenz.iconics.Iconics.applicationContext
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -28,12 +31,12 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader
 import com.mikepenz.materialdrawer.util.DrawerImageLoader
 import models.UserCache
+import ui.fragments.ContactsFragment
 
 import ui.fragments.SettingsFragmnt
 
 
-class AppDrawer (private val chatActivity: AppCompatActivity,
-                 private val toolbar: Toolbar){
+class AppDrawer {
 
     private val TAG = "M_DEBUG"
     private lateinit var mDraver: Drawer
@@ -54,20 +57,20 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
     fun disableDrawer()
     {
         mDraver.actionBarDrawerToggle?.isDrawerIndicatorEnabled = false
-        chatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        APP_ACTIVITY.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-        toolbar.setNavigationOnClickListener {
-            chatActivity.supportFragmentManager.popBackStack()
+        APP_ACTIVITY.mToolBar.setNavigationOnClickListener {
+            APP_ACTIVITY.supportFragmentManager.popBackStack()
         }
     }
 
     fun enableDrawer()
     {
-        chatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        APP_ACTIVITY.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         mDraver.actionBarDrawerToggle?.isDrawerIndicatorEnabled = true
 
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED )
-        toolbar.setNavigationOnClickListener {
+        APP_ACTIVITY.mToolBar.setNavigationOnClickListener {
             mDraver.openDrawer()
         }
 
@@ -77,8 +80,8 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
 
     private fun createDrawer() {
         DrawerBuilder()
-            .withActivity(chatActivity)
-            .withToolbar(toolbar)
+            .withActivity(APP_ACTIVITY)
+            .withToolbar(APP_ACTIVITY.mToolBar)
             .withActionBarDrawerToggle(true)
             .withSelectedItem(-1)
             .withAccountHeader(mHeader)
@@ -86,13 +89,13 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
                 PrimaryDrawerItem().withIdentifier(101)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
-                    .withName(chatActivity.getString(R.string.MyProfile))
+                    .withName(APP_ACTIVITY.getString(R.string.MyProfile))
                     .withIcon(R.drawable.sticker),
 
                 PrimaryDrawerItem().withIdentifier(102)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
-                    .withName(chatActivity.getString(R.string.secondInBar))
+                    .withName(APP_ACTIVITY.getString(R.string.secondInBar))
                     .withIcon(R.drawable.sticker),
 
                 DividerDrawerItem(),
@@ -100,38 +103,38 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
                 PrimaryDrawerItem().withIdentifier(104)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
-                    .withName(chatActivity.getString(R.string.CreateGroup))
+                    .withName(APP_ACTIVITY.getString(R.string.CreateGroup))
                     .withIcon(R.drawable.sticker),
 
                 PrimaryDrawerItem().withIdentifier(105)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
-                    .withName(chatActivity.getString(R.string.createChat))
+                    .withName(APP_ACTIVITY.getString(R.string.createChat))
                     .withIcon(R.drawable.sticker),
 
                 PrimaryDrawerItem().withIdentifier(106)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
-                    .withName(chatActivity.getString(R.string.contacts))
+                    .withName(APP_ACTIVITY.getString(R.string.contacts))
                     .withIcon(R.drawable.sticker),
 
                 PrimaryDrawerItem().withIdentifier(107)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
-                    .withName(chatActivity.getString(R.string.calls))
+                    .withName(APP_ACTIVITY.getString(R.string.calls))
                     .withIcon(R.drawable.sticker),
 
                 PrimaryDrawerItem().withIdentifier(108)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
-                    .withName(chatActivity.getString(R.string.favourites))
+                    .withName(APP_ACTIVITY.getString(R.string.favourites))
                     //.withSelected(false)
                     .withIcon(R.drawable.sticker),
 
                 PrimaryDrawerItem().withIdentifier(109)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
-                    .withName(chatActivity.getString(R.string.settings))
+                    .withName(APP_ACTIVITY.getString(R.string.settings))
                     .withIcon(R.drawable.sticker)
 
             ).withOnDrawerItemClickListener(object :Drawer.OnDrawerItemClickListener{
@@ -142,9 +145,8 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
                 ): Boolean {
                     //Toast.makeText(applicationContext, position.toString(), Toast.LENGTH_SHORT).show()
                     when (position) {
-                        9 -> chatActivity. supportFragmentManager.beginTransaction()
-                            .addToBackStack(null)
-                            .replace(R.id.dataContainer, SettingsFragmnt()).commit()
+                        9 -> APP_ACTIVITY.replaceFragment(SettingsFragmnt())
+                        6-> APP_ACTIVITY.replaceFragment(ContactsFragment())
                     }
 
                     return false
@@ -174,7 +176,7 @@ class AppDrawer (private val chatActivity: AppCompatActivity,
 
 
         mHeader = AccountHeaderBuilder()
-            .withActivity(chatActivity)
+            .withActivity(APP_ACTIVITY)
             .withHeaderBackground(R.drawable.header)
             .addProfiles(
                 mCurrentProfile

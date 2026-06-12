@@ -26,9 +26,7 @@ import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageOptions
 import com.canhub.cropper.CropImageView
 import android.graphics.Color
-import android.net.Uri
 import android.util.Log
-import android.widget.Toast
 import com.canhub.cropper.CropImageActivity
 import models.UserCache
 import java.io.File
@@ -36,6 +34,7 @@ import java.io.FileOutputStream
 import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
+import com.example.myapplication_2.utilits.APP_ACTIVITY
 
 
 class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
@@ -96,7 +95,7 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
             Log.d(TAG, permanentPhotoPath)
 
             setPhoto()
-            (activity as MainChatActivity).mAppDrawer.updateHeader()
+            APP_ACTIVITY.mAppDrawer.updateHeader()
 
 
             // Теперь записываем permanentPhotoPath в вашу базу данных (SQLite / Room)
@@ -120,7 +119,10 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
 
     }
 
+    override fun onStart() {
+        super.onStart()
 
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -142,7 +144,9 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
         val phoneNum: ConstraintLayout = view.findViewById(R.id.setting_btn_change_number_phone)
         val userName: ConstraintLayout = view.findViewById(R.id.setting_btn_change_user_name)
         val info: ConstraintLayout = view.findViewById(R.id.setting_btn_change_bio)
+        val status: TextView = view.findViewById(R.id.settings_status)
 
+        status.text = UserCache.currentUser?.state.toString()
 
 
         val photo: de.hdodenhof.circleimageview.CircleImageView = view.findViewById(R.id.setting_change_photo)
@@ -273,7 +277,7 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
 
                     //R.id.setting_menu_change_photo -> pass
 
-                    R.id.setting_menu_exit -> (activity as MainChatActivity).replaceActivity(RegOrLog())
+                    R.id.setting_menu_exit -> APP_ACTIVITY.replaceActivity(RegOrLog())
 
 
                 }
@@ -288,7 +292,7 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.setting_menu_exit -> {
-                (activity as MainChatActivity).replaceActivity(RegOrLog())
+                APP_ACTIVITY.replaceActivity(RegOrLog())
             }
             R.id.setting_menu_change_info -> replaceFragment(ChangeInfoFragment())
 
