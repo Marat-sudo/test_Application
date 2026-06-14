@@ -11,7 +11,9 @@ import com.example.myapplication_2.R // Укажите ваш пакет
 import com.example.myapplication_2.utilits.AppStates
 import models.User
 
-class ContactsAdapter(private var contactsList: List<User>) :
+class ContactsAdapter(
+    private var contactsList: List<User>,
+    private val onItemClick: (User) -> Unit) :
     RecyclerView.Adapter<ContactsAdapter.ContactViewHolder>() {
 
     // ViewHolder находит элементы по ID строго из вашего XML
@@ -30,12 +32,18 @@ class ContactsAdapter(private var contactsList: List<User>) :
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val contact = contactsList[position]
 
+
         // 1. Склеиваем имя и фамилию (убираем лишние пробелы через trim())
         val fullName = "${contact.firstName} ${contact.lastName}".trim()
         holder.contactFullName.text = if (fullName.isEmpty()) contact.userName else fullName
+        holder.contactStatus.text = contact.status.ifEmpty { "не в сети" }
 
         // 2. Устанавливаем статус (если пустой — пишем дефолтный, например "Offline")
         holder.contactStatus.text = contact.status.ifEmpty { AppStates.OFFLINE.state }
+        // 2. Обрабатываем нажатие на ВСЮ область элемента списка
+        holder.itemView.setOnClickListener {
+            onItemClick(contact) // Передаем данные нажатого контакта вверх
+        }
 
         // 3. Загружаем фото профиля
         if (contact.photoUrl.isNotEmpty()) {

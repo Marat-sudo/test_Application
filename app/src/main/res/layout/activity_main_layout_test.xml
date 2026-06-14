@@ -9,7 +9,7 @@
 
     <!-- для отображения текста в ... -->
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/mainToolBar"
+        android:id="@+id/main_ToolBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,18 +17,19 @@
         app:titleTextColor="@color/white"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         style="@style/mainToolBar" >
-        <include layout="@layout/toolbar_info"
+        <include
+            layout="@layout/toolbar_info"
             android:id="@+id/toolbar_info"
             android:visibility="gone"/>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:id="@+id/dataContainer"
+        android:id="@+id/data_Container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainToolBar"
+        app:layout_constraintTop_toBottomOf="@id/main_ToolBar"
         android:layout_height="0dp" />
 
 

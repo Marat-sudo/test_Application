@@ -10,6 +10,7 @@
     <dimen name="normal_text">16sp</dimen>
     <dimen name="large_text">16sp</dimen>
     <dimen name="vertical_large_margin_top">16dp</dimen>
+    <dimen name="appPadding">10dp</dimen>
 
     <!--  Settings  -->
     <dimen name="setting_change_photo_width">45dp</dimen>
@@ -21,4 +22,5 @@
     <!-- ToolBar -->
     <dimen name="toolbar_image_width">45dp</dimen>
     <dimen name="toolbar_image_height">45dp</dimen>
+
 </resources>

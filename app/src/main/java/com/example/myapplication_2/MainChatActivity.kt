@@ -49,7 +49,7 @@ class MainChatActivity : AppCompatActivity() {
 
             // Загружаем стартовый фрагмент чата
             supportFragmentManager.beginTransaction()
-                .replace(R.id.dataContainer, ChatFragment())
+                .replace(R.id.data_Container, ChatFragment())
                 .commit()
         }
 //        Toast.makeText(this, "create", Toast.LENGTH_SHORT).show();
@@ -130,7 +130,7 @@ class MainChatActivity : AppCompatActivity() {
 
         setSupportActionBar(mToolBar)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.dataContainer, ChatFragment()).commit()
+            .replace(R.id.data_Container, ChatFragment()).commit()
         mAppDrawer.create()
 
     }

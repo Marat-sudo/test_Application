@@ -1,13 +1,46 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/md_teal_200"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="ui.fragments.SingleChatFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
 
-</FrameLayout>
+        app:layout_constraintBottom_toTopOf="@id/chat_input_message"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/message_item"/>
+
+
+    <EditText
+        android:id="@+id/chat_input_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="сообщение"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@id/chat_set_img"
+        android:textColorHint="@color/md_grey_500"
+        android:padding = "@dimen/appPadding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    
+    <ImageView
+        android:id="@+id/chat_set_img"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:src="@drawable/baseline_directions_run_24"
+        android:padding="@dimen/appPadding"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/chat_input_message"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

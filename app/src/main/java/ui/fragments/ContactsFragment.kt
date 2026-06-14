@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication_2.R
 import com.example.myapplication_2.utilits.APP_ACTIVITY
+import com.example.myapplication_2.utilits.replaceFragment
 import models.ContactsDatabase
 import models.User
 import models.UserCache
@@ -49,8 +51,23 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
         mRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
 
         // Инициализируем адаптер
-        adapter = ContactsAdapter(emptyList())
+        adapter = ContactsAdapter(emptyList()) { clickedUser ->
+            // ЭТОТ КОД ВЫПОЛНИТСЯ ПРИ КЛИКЕ НА ЭЛЕМЕНТ
+            handleContactClick(clickedUser)
+        }
         mRecyclerView?.adapter = adapter
+    }
+
+    // 2. Метод, обрабатывающий нажатие
+    private fun handleContactClick(user: User) {
+        // Пример обычного уведомления:
+        Toast.makeText(
+            requireContext(),
+            "Вы выбрали: ${user.firstName} (ID: ${user.id})",
+            Toast.LENGTH_SHORT
+        ).show()
+
+        replaceFragment(SingleChatFragment(user))
     }
 
     private fun loadContacts() {

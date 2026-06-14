@@ -6,7 +6,7 @@
     android:layout_height="?attr/actionBarSize">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/toolbar_image"
+        android:id="@+id/tool_bar_info_image"
         android:layout_width="@dimen/toolbar_image_width"
         android:layout_height="@dimen/toolbar_image_height"
         app:layout_constraintTop_toTopOf="parent"
@@ -14,23 +14,23 @@
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/img"
         app:civ_circle_background_color="@color/accent"
-        android:layout_marginStart="@dimen/app_small_margin"/>
+        />
     
     
     <TextView
-        android:id="@+id/fullName"
+        android:id="@+id/tool_bar_info_fullName"
         style="@style/normalText"
         android:text="name secondName"
         android:textColor="@color/white"
-        app:layout_constraintStart_toEndOf="@+id/toolbar_image"
-        app:layout_constraintTop_toTopOf="@id/toolbar_image"/>
+        app:layout_constraintStart_toEndOf="@+id/tool_bar_info_image"
+        app:layout_constraintTop_toTopOf="@id/tool_bar_info_image"/>
 
     <TextView
-        android:id="@+id/status"
+        android:id="@+id/tool_bar_info_status"
         style="@style/smallText"
         android:text="в сети"
         android:textColor="@color/md_grey_500"
-        app:layout_constraintStart_toEndOf="@+id/toolbar_image"
-        app:layout_constraintTop_toBottomOf="@+id/fullName"/>
+        app:layout_constraintStart_toEndOf="@+id/tool_bar_info_image"
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar_info_fullName"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
