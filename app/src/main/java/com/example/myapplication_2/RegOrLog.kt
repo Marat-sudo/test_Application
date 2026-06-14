@@ -9,7 +9,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.myapplication_2.utilits.replaceActivity
 import models.UserCache
+import models.UserDatabase
 
 
 class RegOrLog : AppCompatActivity() {
@@ -30,10 +32,18 @@ class RegOrLog : AppCompatActivity() {
             val timStatus = true
             val log = (userPhone.text.toString()).replace("\\s".toRegex(), "")
             val regex = """\+\d{11}""".toRegex()
+
             if (log != "" && timStatus && log.matches(regex)){
-                UserCache.currentUser?.phone = log
-                val intent = Intent(this, RegActivityCodePhone::class.java)
-                startActivity(intent)
+                val defaultUser = UserDatabase.getUserByPhone(log)
+                if (defaultUser != null){
+                    UserCache.currentUser = defaultUser
+                    replaceActivity(LoginUserActivity())
+                }
+                else {
+                    UserCache.currentUser?.phone = log
+                    val intent = Intent(this, RegActivityCodePhone::class.java)
+                    startActivity(intent)
+                }
             }
 
             else

@@ -62,7 +62,8 @@
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-
+                android:backgroundTint="@color/white"
+                android:textCursorDrawable="@color/white"
                 android:ems="10"
                 android:hint="@string/enterName"
                 android:inputType="text"
@@ -77,6 +78,8 @@
                 android:ems="10"
                 android:hint="@string/enterSecondName"
                 android:inputType="text"
+                android:backgroundTint="@color/themeBlackCursor"
+                android:textCursorDrawable="@color/white"
                 android:textColor="@color/white"
                 android:textColorHint="#49454f" />
 

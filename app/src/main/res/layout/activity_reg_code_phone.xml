@@ -49,6 +49,8 @@
         android:layout_marginTop="15dp"
         android:inputType="phone"
         android:textColorHint="#49454f"
+        android:backgroundTint="@color/themeBlackCursor"
+        android:textCursorDrawable="@color/themeBlackCursor"
         android:layout_gravity="center"
         android:textColor="@color/white"
         android:hint="@string/codeFromSms" />

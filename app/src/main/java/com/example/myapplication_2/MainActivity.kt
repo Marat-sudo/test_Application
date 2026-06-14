@@ -7,6 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.myapplication_2.utilits.AppStates
+import com.example.myapplication_2.utilits.replaceActivity
+import models.User
+import models.UserCache.currentUser
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +33,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         bl.setOnClickListener {
-            val intent = Intent(this, MainChatActivity::class.java)
-            startActivity(intent)
+            currentUser = User(
+                id = "1",
+                userName = "marat_dev",
+                bio = "тест тест тест тест тест тест тест тест тест тест тест тест тест тест тест",
+                firstName = "m",
+                lastName = "n",
+                phone = "+7 000 000 00 00",
+                photoUrl = "res/drawable/img.png",
+                state = AppStates.OFFLINE.state
+            )
+            replaceActivity(MainChatActivity())
         }
 
     }

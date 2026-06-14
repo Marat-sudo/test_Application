@@ -1,5 +1,6 @@
 package models
 
+import com.example.myapplication_2.utilits.AppStates
 import models.UserCache.currentUser
 object UserDatabase {
 
@@ -8,7 +9,16 @@ object UserDatabase {
 
     init {
         // Наполняем нашу базу дефолтными пользователями при запуске приложения
-
+        val user1 = User(
+            id = "1",
+            userName = "marat_dev",
+            bio = "тест тест тест тест тест тест тест тест тест тест тест тест тест тест тест",
+            firstName = "m",
+            lastName = "n",
+            phone = "+70000000000",
+            photoUrl = "res/drawable/img.png",
+            state = AppStates.OFFLINE.state
+        )
         val user2 = User(
             id = "2",
             userName = "maxLover",
@@ -24,7 +34,8 @@ object UserDatabase {
             phone = "+79222222222"
         )
 
-        usersTable[currentUser?.id ?: "-1"] = currentUser?: user2
+        usersTable[user1.id] = user1
+
         usersTable[user2.id] = user2
         usersTable[user3.id] = user3
     }
