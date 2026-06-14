@@ -85,6 +85,7 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
     override fun onDestroyView() {
         super.onDestroyView()
         mRecyclerView = null
+        APP_ACTIVITY.title = getString(R.string.app_name)
     }
 }
 

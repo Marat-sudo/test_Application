@@ -273,6 +273,7 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 // Обрабатываем нажатия
                 when (menuItem.itemId) {
+                    R.id.setting_menu_change_photo -> changePhoto()
                     R.id.setting_menu_change_info -> replaceFragment(ChangeInfoFragment())
 
                     //R.id.setting_menu_change_photo -> pass

@@ -79,6 +79,7 @@ class AppDrawer {
 
 
     private fun createDrawer() {
+        val icon = R.drawable.baseline_directions_run_24
         DrawerBuilder()
             .withActivity(APP_ACTIVITY)
             .withToolbar(APP_ACTIVITY.mToolBar)
@@ -90,13 +91,13 @@ class AppDrawer {
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(APP_ACTIVITY.getString(R.string.MyProfile))
-                    .withIcon(R.drawable.sticker),
+                    .withIcon(icon),
 
                 PrimaryDrawerItem().withIdentifier(102)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(APP_ACTIVITY.getString(R.string.secondInBar))
-                    .withIcon(R.drawable.sticker),
+                    .withIcon(icon),
 
                 DividerDrawerItem(),
 
@@ -104,38 +105,38 @@ class AppDrawer {
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(APP_ACTIVITY.getString(R.string.CreateGroup))
-                    .withIcon(R.drawable.sticker),
+                    .withIcon(icon),
 
                 PrimaryDrawerItem().withIdentifier(105)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(APP_ACTIVITY.getString(R.string.createChat))
-                    .withIcon(R.drawable.sticker),
+                    .withIcon(icon),
 
                 PrimaryDrawerItem().withIdentifier(106)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(APP_ACTIVITY.getString(R.string.contacts))
-                    .withIcon(R.drawable.sticker),
+                    .withIcon(icon),
 
                 PrimaryDrawerItem().withIdentifier(107)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(APP_ACTIVITY.getString(R.string.calls))
-                    .withIcon(R.drawable.sticker),
+                    .withIcon(icon),
 
                 PrimaryDrawerItem().withIdentifier(108)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(APP_ACTIVITY.getString(R.string.favourites))
                     //.withSelected(false)
-                    .withIcon(R.drawable.sticker),
+                    .withIcon(icon),
 
                 PrimaryDrawerItem().withIdentifier(109)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(APP_ACTIVITY.getString(R.string.settings))
-                    .withIcon(R.drawable.sticker)
+                    .withIcon(icon)
 
             ).withOnDrawerItemClickListener(object :Drawer.OnDrawerItemClickListener{
                 override fun onItemClick(
