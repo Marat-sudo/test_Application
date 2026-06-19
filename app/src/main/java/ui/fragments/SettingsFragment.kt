@@ -35,6 +35,7 @@ import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
 import com.example.myapplication_2.utilits.APP_ACTIVITY
+import models.UserDatabase.saveUser
 
 
 class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
@@ -58,6 +59,9 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
 
 
             savePhotoUrl(uriContent.toString())
+            UserCache.currentUser?.photoUrl = uriContent.toString()
+
+            saveUser(UserCache.currentUser)
             // Например, отображаем в ImageView или отправляем на сервер:
             // binding.myImageView.setImageURI(uriContent)
         }
@@ -192,6 +196,8 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
         phoneNumView.text = UserCache.currentUser?.phone
         userNameView.text = UserCache.currentUser?.userName
         userBioView.text = UserCache.currentUser?.bio
+
+        saveUser(UserCache.currentUser)
 
     }
 

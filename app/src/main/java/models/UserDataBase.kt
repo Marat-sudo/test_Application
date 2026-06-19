@@ -4,11 +4,10 @@ import com.example.myapplication_2.utilits.AppStates
 import models.UserCache.currentUser
 object UserDatabase {
 
-    // Симуляция таблицы "Users". Ключ — String (id пользователя), Значение — сам User
+    // Ключ — String (id пользователя), Значение — сам User
     private val usersTable = mutableMapOf<String, User>()
 
     init {
-        // Наполняем нашу базу дефолтными пользователями при запуске приложения
         val user1 = User(
             id = "1",
             userName = "marat_dev",
@@ -41,29 +40,29 @@ object UserDatabase {
     }
 
     /**
-     * Сохранить или обновить пользователя (Аналог INSERT OR REPLACE)
+    Сохранить или обновить пользователя (Аналог INSERT OR REPLACE)
      */
-    fun saveUser(user: User) {
+    fun saveUser(user: User?) {
+        if (user == null) return
         usersTable[user.id] = user
     }
 
     /**
-     * Найти пользователя по его ID (Аналог SELECT * FROM users WHERE id = :id)
+    Найти пользователя по его ID
      */
     fun getUserById(id: String): User? {
-        // Возвращаем копию объекта, чтобы случайно не испортить данные в БД напрямую
         return usersTable[id]?.copy()
     }
 
     /**
-     * Поиск пользователя по номеру телефона (например, для авторизации или проверки контактов)
+    Поиск пользователя по номеру телефона
      */
     fun getUserByPhone(phone: String): User? {
         return usersTable.values.find { it.phone == phone }?.copy()
     }
 
     /**
-     * Получить список вообще всех пользователей системы
+    Получить список всех пользователей системы
      */
     fun getAllUsers(): List<User> {
         return usersTable.values.map { it.copy() }
