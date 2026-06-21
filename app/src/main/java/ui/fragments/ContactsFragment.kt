@@ -14,6 +14,7 @@ import com.example.myapplication_2.utilits.replaceFragment
 import models.ContactsDatabase
 import models.User
 import models.UserCache
+import ui.fragments.single_chat.SingleChatFragment
 import ui.objects.ContactsAdapter
 
 class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {

@@ -32,9 +32,10 @@ class RegOrLog : AppCompatActivity() {
             val timStatus = true
             val log = (userPhone.text.toString()).replace("\\s".toRegex(), "")
             val regex = """\+\d{11}""".toRegex()
-
+            println(log)
             if (log != "" && timStatus && log.matches(regex)){
                 val defaultUser = UserDatabase.getUserByPhone(log)
+                println(defaultUser)
                 if (defaultUser != null){
                     UserCache.currentUser = defaultUser
                     replaceActivity(LoginUserActivity())

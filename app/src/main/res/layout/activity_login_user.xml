@@ -51,6 +51,8 @@
             android:textColorHint="#49454f"
             android:layout_gravity="center"
             android:textColor="@color/white"
+            android:backgroundTint="@color/themeBlackCursor"
+            android:textCursorDrawable="@color/themeBlackCursor"
             android:hint="введите код" />
 
         <Button

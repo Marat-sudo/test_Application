@@ -32,8 +32,12 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+
+
+
     }
     kotlinOptions {
         jvmTarget = "11"
@@ -41,6 +45,8 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+    implementation(libs.kotlinx.datetime)
     implementation(libs.glide)
     implementation(libs.picasso)
 

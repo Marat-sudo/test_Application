@@ -1,16 +1,16 @@
 package models
 
-import com.example.myapplication_2.R
+
+import java.time.LocalDateTime
 
 data class CommonModel (
-    val id: String = "",
-    var userName: String = "",
-    var bio: String = "",
-    var firstName: String= "",
-    var lastName: String= "",
-    var status: String = "",
-    var phone: String = "",
-    var photoUrl: String = "",
-    var state: String =""
+    val user: User,
+    var text: String = "",
+    var type: String = "",
+    var from: String = "",
+    var timeStamp: LocalDateTime? = null
 )
+{
+
+}
 

@@ -14,9 +14,7 @@ object UserDatabase {
             bio = "тест тест тест тест тест тест тест тест тест тест тест тест тест тест тест",
             firstName = "m",
             lastName = "n",
-            phone = "+70000000000",
-            photoUrl = "res/drawable/img.png",
-            state = AppStates.OFFLINE.state
+            phone = "+79000000000"
         )
         val user2 = User(
             id = "2",
@@ -34,7 +32,6 @@ object UserDatabase {
         )
 
         usersTable[user1.id] = user1
-
         usersTable[user2.id] = user2
         usersTable[user3.id] = user3
     }
@@ -58,6 +55,7 @@ object UserDatabase {
     Поиск пользователя по номеру телефона
      */
     fun getUserByPhone(phone: String): User? {
+        println(usersTable)
         return usersTable.values.find { it.phone == phone }?.copy()
     }
 

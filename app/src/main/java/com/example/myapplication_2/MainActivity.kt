@@ -39,8 +39,7 @@ class MainActivity : AppCompatActivity() {
                 bio = "тест тест тест тест тест тест тест тест тест тест тест тест тест тест тест",
                 firstName = "m",
                 lastName = "n",
-                phone = "+7 000 000 00 00",
-                photoUrl = "res/drawable/img.png",
+                phone = "+79000000000",
                 state = AppStates.OFFLINE.state
             )
             replaceActivity(MainChatActivity())

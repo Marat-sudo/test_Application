@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide // Если используете Glide для 
 import de.hdodenhof.circleimageview.CircleImageView
 import com.example.myapplication_2.R // Укажите ваш пакет
 import com.example.myapplication_2.utilits.AppStates
+import models.CommonModel
 import models.User
 
 class ContactsAdapter(

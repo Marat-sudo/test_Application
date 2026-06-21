@@ -17,6 +17,7 @@ import com.example.myapplication_2.utilits.READ_CONTACT
 import ui.fragments.ChatFragment
 import ui.objects.AppDrawer
 import models.CommonModel
+import models.User
 
 
 class MainChatActivity : AppCompatActivity() {
@@ -62,7 +63,7 @@ class MainChatActivity : AppCompatActivity() {
         // может это вообще убрать потом
         if (com.example.myapplication_2.utilits.checkPermission(READ_CONTACT))
         {
-            val arrayContacts = arrayListOf<CommonModel>()
+            val arrayContacts = arrayListOf<User>()
             val cursor = APP_ACTIVITY.contentResolver.query(
                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                 null,
@@ -81,13 +82,13 @@ class MainChatActivity : AppCompatActivity() {
                         it.getColumnIndexOrThrow(
                             ContactsContract.CommonDataKinds.Phone.NUMBER))
 
-                    val newModel = CommonModel()
+                    val newModel = User()
                     val pars = fullName.split(" ", limit = 2)
                     newModel.firstName = pars[0]
                     newModel.lastName = pars.getOrNull(1) ?: ""
                     newModel.phone = phone.replace(Regex("[\\s,-]"), "")
                     arrayContacts.add(newModel)
-                    println(newModel.phone)
+
 
                 }
             }
