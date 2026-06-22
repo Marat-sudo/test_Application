@@ -13,16 +13,28 @@
         android:id="@+id/settingHeader"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="@color/colorPrimary"
+        
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+        
+        <ImageView
+            android:id="@+id/UserBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/header"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/settingUserPhoto"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/sticker"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/outline_account_circle_24"
             app:civ_border_color="@color/design_default_color_primary_dark"
             app:civ_border_width="@dimen/settings_user_photo_border"
             app:layout_constraintEnd_toEndOf="parent"

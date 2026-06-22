@@ -12,7 +12,8 @@ data class User (
     var status: String = "",
     var phone: String = "",
     var photoUrl: String = "",
-    var state: String =""
+    var state: String ="",
+    var userBg: String = ""
 )
 
 object UserCache {

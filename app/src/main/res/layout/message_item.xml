@@ -8,13 +8,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bloc_user_message"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
+        android:layout_margin="10dp"
+        android:minWidth="50dp"
+        android:background="@drawable/bg_user_message"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="10dp"
-        android:background="@drawable/bg_user_message"
-        android:layout_height="wrap_content">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
             android:id="@+id/chat_user_message"
@@ -23,20 +24,20 @@
             android:text="@string/testing"
             android:padding="@dimen/appPadding"
             android:maxWidth="300dp"
+            android:minWidth="30dp"
             android:textColor="@color/black"
-            android:gravity="end"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/chat_user_message_time"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="00.00"
             android:textColor="@color/black"
             android:gravity="end"
             android:textSize="@dimen/small_text_1"
+            android:layout_marginStart="@dimen/app_small_margin"
             android:layout_marginEnd="@dimen/app_small_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chat_user_message"/>
@@ -49,6 +50,7 @@
         android:layout_marginEnd="100dp"
         app:layout_constraintWidth_percent="0.75"
         android:layout_margin="10dp"
+        android:minWidth="50dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -60,23 +62,23 @@
             android:id="@+id/chat_received_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/testing"
-            android:padding="@dimen/appPadding"
+            android:gravity="start"
             android:maxWidth="300dp"
+            android:padding="@dimen/appPadding"
+            android:text="@string/testing"
             android:textColor="@color/black"
-            android:gravity="end"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/chat_received_message_time"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="00.00"
             android:textColor="@color/black"
             android:gravity="end"
             android:textSize="@dimen/small_text_1"
+            android:layout_marginStart="@dimen/app_small_margin"
             android:layout_marginEnd="@dimen/app_small_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chat_received_message"/>

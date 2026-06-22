@@ -1,8 +1,6 @@
 package ui.fragments
 
 
-import android.content.Intent
-import android.graphics.Bitmap
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -14,7 +12,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.myapplication_2.MainChatActivity
 import com.example.myapplication_2.R
 import com.example.myapplication_2.RegOrLog
 import com.example.myapplication_2.utilits.replaceActivity
@@ -26,8 +23,11 @@ import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageOptions
 import com.canhub.cropper.CropImageView
 import android.graphics.Color
+import android.net.Uri
 import android.util.Log
-import com.canhub.cropper.CropImageActivity
+import android.widget.ImageView
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import models.UserCache
 import java.io.File
 import java.io.FileOutputStream
@@ -40,16 +40,22 @@ import models.UserDatabase.saveUser
 
 class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
     private val TAG = "M_DEBUG"
-    lateinit var mBinding: de.hdodenhof.circleimageview.CircleImageView
+    private lateinit var mBinding: de.hdodenhof.circleimageview.CircleImageView
+    private lateinit var phoneNumView: TextView
+    private lateinit var userNameView: TextView
+    private lateinit var userBioView: TextView
+    private lateinit var userFullName: TextView
+    private lateinit var userBackground: ImageView
 
-    lateinit var phoneNumView: TextView
+    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        // Этот блок выполнится, когда пользователь выберет картинку
+        if (uri != null) {
 
-    lateinit var userNameView: TextView
+            saveUserBgUrl(uri)
+            saveUser(UserCache.currentUser)
 
-    lateinit var userBioView: TextView
-
-    lateinit var userFullName: TextView
-
+        }
+    }
 
     private val cropImage = registerForActivityResult(CropImageContract()) { result ->
         if (result.isSuccessful) {
@@ -58,12 +64,9 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
             // val croppedImageFilePath = result.getUriFilePath(this)
 
 
-            savePhotoUrl(uriContent.toString())
-            UserCache.currentUser?.photoUrl = uriContent.toString()
+            savePhotoUrl(uriContent)
 
             saveUser(UserCache.currentUser)
-            // Например, отображаем в ImageView или отправляем на сервер:
-            // binding.myImageView.setImageURI(uriContent)
         }
         else {
             // An error occurred.
@@ -72,15 +75,14 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
         }
     }
 
-    private fun savePhotoUrl(uriString: String) {
+    private fun savePhotoUrl(uri: Uri?) {
         try {
-            val sourceUri = uriString.toUri()
-
+            val uri = uri ?: return
             // Открываем поток чтения из временного файла библиотеки
-            val inputStream = requireContext().contentResolver.openInputStream(sourceUri)
+            val inputStream = requireContext().contentResolver.openInputStream(uri)
 
             // Создаем постоянный файл в локальной папке приложения
-            val destinationFile = File(requireContext().filesDir, "user_profile_avatar.jpg")
+            val destinationFile = File(requireContext().filesDir, "user_profile_bg.jpg")
             val outputStream = FileOutputStream(destinationFile)
 
             // Копируем байты из временного файла в постоянный
@@ -104,6 +106,39 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
 
             // Теперь записываем permanentPhotoPath в вашу базу данных (SQLite / Room)
             //savePathToDatabase(permanentPhotoPath)
+
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+
+        }
+    }
+    private fun saveUserBgUrl(uri: Uri?) {
+        try {
+            val sourceUri = uri ?: return
+
+            // Открываем поток чтения из временного файла библиотеки
+            val inputStream = requireContext().contentResolver.openInputStream(sourceUri)
+
+            // Создаем постоянный файл в локальной папке приложения
+            val destinationFile = File(requireContext().filesDir, "user_profile_avatar.jpg")
+            val outputStream = FileOutputStream(destinationFile)
+
+            // Копируем байты из временного файла в постоянный
+            inputStream?.use { input ->
+                outputStream.use { output ->
+                    input.copyTo(output)
+                }
+            }
+
+            // ВОТ ОН — ваш постоянный локальный URL/путь к файлу
+            val permanentPhotoPath = destinationFile.absolutePath
+
+            UserCache.currentUser?.userBg = permanentPhotoPath
+
+            setUserBg()
+            APP_ACTIVITY.mAppDrawer.updateHeader()
+
 
 
         } catch (e: Exception) {
@@ -140,6 +175,8 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
         userBioView = view.findViewById(R.id.setting_bio)
         userFullName = view.findViewById(R.id.setting_user_full_name)
 
+        userBackground = view.findViewById(R.id.UserBackground)
+
         /*
     setting_phone_number
     setting_user_name
@@ -157,6 +194,7 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
 
         setPhoto()
         initUserInfo()
+        setUserBg()
 
         phoneNum.setOnClickListener {
 
@@ -175,16 +213,10 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
 
         photo.setOnClickListener {
             changePhoto()
-
-
         }
 
     }
 
-    private fun initView(view: View){
-
-
-    }
 
     private fun initUserInfo(){
         /*
@@ -217,20 +249,21 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
         }
     }
 
+    private fun setUserBg() {
 
-    private fun startCrop() {
-
-        // Start cropping activity for a pre-acquired image with custom settings.
-        cropImage.launch(
-            CropImageContractOptions(
-                uri = null,
-                cropImageOptions = CropImageOptions(
-                    guidelines = CropImageView.Guidelines.ON,
-                    outputCompressFormat = Bitmap.CompressFormat.PNG
-                )
-            )
-        )
+        val urlBg = UserCache.currentUser?.userBg
+        println(urlBg)
+        println(urlBg != null && urlBg.isNotEmpty())
+        if (urlBg != null && urlBg.isNotEmpty()) {
+            Glide.with(this)
+                .load(urlBg)
+                .signature(ObjectKey(File(urlBg).lastModified()))
+                .placeholder(R.drawable.sticker) // дефолтная картинка, пока грузится фото
+                .error(R.drawable.sticker)
+                .into(userBackground)
         }
+    }
+
 
 
     private fun changePhoto() {
@@ -281,13 +314,15 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
                 when (menuItem.itemId) {
                     R.id.setting_menu_change_photo -> changePhoto()
                     R.id.setting_menu_change_info -> replaceFragment(ChangeInfoFragment())
-
+                    R.id.setting_menu_change_background -> pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
                     //R.id.setting_menu_change_photo -> pass
 
                     R.id.setting_menu_exit -> APP_ACTIVITY.replaceActivity(RegOrLog())
 
-
+                    else -> return false
                 }
+
+
                 return true
 
             }
@@ -298,17 +333,14 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.setting_menu_exit -> {
-                APP_ACTIVITY.replaceActivity(RegOrLog())
-            }
+            R.id.setting_menu_exit ->  APP_ACTIVITY.replaceActivity(RegOrLog())
+
             R.id.setting_menu_change_info -> replaceFragment(ChangeInfoFragment())
 
         }
 
         return true
     }
-
-
 
 }
 

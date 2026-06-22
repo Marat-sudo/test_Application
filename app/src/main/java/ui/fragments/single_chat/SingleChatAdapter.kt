@@ -11,10 +11,14 @@ import com.example.myapplication_2.R
 import models.CommonModel
 import models.User
 import models.UserCache
+import java.time.format.DateTimeFormatter
 
 class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolder>() {
-    //TODO("надо будет потом заменить User на commonModel")
+
     private var listMessageCache = mutableListOf<CommonModel>()
+
+    // 1. Создаем форматтер, который оставляет только Часы и Минуты
+
 
     override fun onCreateViewHolder(
          parent: ViewGroup,
@@ -30,17 +34,20 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolde
         holder: SingleChatHolder,
         position: Int
     ) {
+        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+        val formattedTime = listMessageCache[position].timeStamp?.format(timeFormatter)
+
         if (listMessageCache[position].from == UserCache.currentUser?.id){
             holder.blockUserMessage.visibility = View.VISIBLE
             holder.blockReceivedMessage.visibility = View.GONE
             holder.chatUserMessage.text = listMessageCache[position].text
-            holder.chatUserMessageTime.text = listMessageCache[position].timeStamp.toString()
+            holder.chatUserMessageTime.text = formattedTime
         }
         else {
             holder.blockUserMessage.visibility = View.GONE
             holder.blockReceivedMessage.visibility = View.VISIBLE
             holder.chatReceivedMessage.text = listMessageCache[position].text
-            holder.chatReceivedMessageTime.text = listMessageCache[position].timeStamp.toString()
+            holder.chatReceivedMessageTime.text = formattedTime
         }
 
     }
