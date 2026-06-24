@@ -63,16 +63,20 @@ class SingleChatFragment(private val contact: User) : BaseFragment(R.layout.frag
     private fun sendMessage() {
         val messageText = chatInputMessage.text.toString().trim()
 
-        if (messageText.isEmpty()) return
-        if (UserCache.currentUser == null) return
+        if (messageText.isEmpty()) {
+            return
+        }
+        if (UserCache.currentUser == null) {
+            return
+        }
 
-        val userId = UserCache.currentUser?.id ?: "-1"
+        val userId = UserCache.currentUser!!.id
         // Создаем модель сообщения
         val newMessage = CommonModel(
             user = UserCache.currentUser!!,
             text = messageText,
             from = userId,
-            timeStamp = LocalDateTime.now() // Текущее время отправки
+            timeStamp = LocalDateTime.now()
         )
         MessagesDatabase.saveMessage(UserCache.currentUser!!.id, contact.id, newMessage)
         chatAdapter.addMessage(newMessage)

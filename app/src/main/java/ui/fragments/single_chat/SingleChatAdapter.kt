@@ -24,6 +24,7 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolde
          parent: ViewGroup,
         viewType: Int
     ): SingleChatHolder {
+        // штука для создания холдера во фрагменте
         val view = LayoutInflater.
             from(parent.context).
                 inflate(R.layout.message_item, parent, false)
@@ -34,9 +35,12 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolde
         holder: SingleChatHolder,
         position: Int
     ) {
+        // формат для времени в чате
         val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
-        val formattedTime = listMessageCache[position].timeStamp?.format(timeFormatter)
+        // переводим в нормальный формат сообщение
+        val formattedTime = listMessageCache[position].timeStamp.format(timeFormatter)
 
+        // к холдеру в зависимости от сообщения изменяем вид recycle view
         if (listMessageCache[position].from == UserCache.currentUser?.id){
             holder.blockUserMessage.visibility = View.VISIBLE
             holder.blockReceivedMessage.visibility = View.GONE

@@ -7,6 +7,7 @@ object UserDatabase {
     // Ключ — String (id пользователя), Значение — сам User
     private val usersTable = mutableMapOf<String, User>()
 
+    // базовые юзера для примера
     init {
         val user1 = User(
             id = "1",
@@ -37,7 +38,7 @@ object UserDatabase {
     }
 
     /**
-    Сохранить или обновить пользователя (Аналог INSERT OR REPLACE)
+    Сохранить или обновить пользователя
      */
     fun saveUser(user: User?) {
         if (user == null) return

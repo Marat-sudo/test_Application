@@ -35,11 +35,11 @@ import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
 import com.example.myapplication_2.utilits.APP_ACTIVITY
+import com.example.myapplication_2.utilits.showToast
 import models.UserDatabase.saveUser
 
 
 class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
-    private val TAG = "M_DEBUG"
     private lateinit var mBinding: de.hdodenhof.circleimageview.CircleImageView
     private lateinit var phoneNumView: TextView
     private lateinit var userNameView: TextView
@@ -50,28 +50,22 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
     private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         // Этот блок выполнится, когда пользователь выберет картинку
         if (uri != null) {
-
             saveUserBgUrl(uri)
             saveUser(UserCache.currentUser)
-
         }
     }
 
     private val cropImage = registerForActivityResult(CropImageContract()) { result ->
         if (result.isSuccessful) {
-            // Успешно! Получаем URI обрезанного изображения
+            //Получаем URI обрезанного изображения
             val uriContent = result.uriContent
-            // val croppedImageFilePath = result.getUriFilePath(this)
-
 
             savePhotoUrl(uriContent)
-
             saveUser(UserCache.currentUser)
         }
         else {
-            // An error occurred.
-            val exception = result.error
-            // Handle the error.
+            val exception: String = result.error?.message.toString()
+            showToast(exception)
         }
     }
 
@@ -92,13 +86,11 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
                 }
             }
 
-            // ВОТ ОН — ваш постоянный локальный URL/путь к файлу
+            // постоянный локальный путь к файлу
             val permanentPhotoPath = destinationFile.absolutePath
 
             UserCache.currentUser?.photoUrl = permanentPhotoPath
 
-            Log.d(TAG, "------------------------------")
-            Log.d(TAG, permanentPhotoPath)
 
             setPhoto()
             APP_ACTIVITY.mAppDrawer.updateHeader()
@@ -131,7 +123,7 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
                 }
             }
 
-            // ВОТ ОН — ваш постоянный локальный URL/путь к файлу
+            //постоянный локальный путь к файлу
             val permanentPhotoPath = destinationFile.absolutePath
 
             UserCache.currentUser?.userBg = permanentPhotoPath
@@ -150,11 +142,6 @@ class SettingsFragmnt : BaseFragment(R.layout.fragment_settings) {
     override fun onResume() {
         super.onResume()
 
-
-    }
-
-    private fun initFields()
-    {
 
     }
 

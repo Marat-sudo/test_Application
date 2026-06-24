@@ -3,6 +3,7 @@ package models
 import com.example.myapplication_2.R
 import com.example.myapplication_2.utilits.AppStates
 
+// общая модель
 data class User (
     val id: String = "",
     var userName: String = "",
@@ -18,6 +19,7 @@ data class User (
 
 object UserCache {
 
-    // Создаем переменную нашего юзера и сразу инициализируем её дефолтными значениями
+    // TODO потом перенести куда-то
+    // здесь храниться модель конкретного юзера
     var currentUser: User? = null
 }

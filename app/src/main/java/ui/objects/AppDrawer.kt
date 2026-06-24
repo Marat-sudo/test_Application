@@ -38,7 +38,6 @@ import ui.fragments.SettingsFragmnt
 
 class AppDrawer {
 
-    private val TAG = "M_DEBUG"
     private lateinit var mDraver: Drawer
     private lateinit var mHeader: AccountHeader
     private lateinit var mDrawerLayout: DrawerLayout
@@ -116,14 +115,14 @@ class AppDrawer {
                 PrimaryDrawerItem().withIdentifier(106)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
-                    .withName(APP_ACTIVITY.getString(R.string.contacts))
-                    .withIcon(icon),
+                    .withName(APP_ACTIVITY.getString(R.string.friends))
+                    .withIcon(R.drawable.baseline_emoji_people_24),
 
                 PrimaryDrawerItem().withIdentifier(107)
                     .withSelectable(false)
                     .withIconTintingEnabled(true)
                     .withName(APP_ACTIVITY.getString(R.string.calls))
-                    .withIcon(icon),
+                    .withIcon(R.drawable.outline_call_24),
 
                 PrimaryDrawerItem().withIdentifier(108)
                     .withSelectable(false)
@@ -160,22 +159,21 @@ class AppDrawer {
 
 
     private fun createHeader() {
-        val p  = "app/src/main/res/drawable/m.jpg"
         val path = UserCache.currentUser?.photoUrl
 
 
-        val fullName: String = (UserCache.currentUser?.firstName + " " + UserCache.currentUser?.lastName)
+
         /* TODO Доделать Icon для header
         * проблемы загрузки фото из базового "app/src/main/res/drawable/m.jpg", но
         * если путь через кэш то всё работает
         * */
-        mCurrentProfile = ProfileDrawerItem()
-            .withName(fullName)
-            .withEmail(UserCache.currentUser?.phone)
-            //.withIcon(path!!)
-            .withIdentifier(200)
 
-
+        if (path != null && path != ""){
+           headerIcon(path)
+        }
+        else{
+            headerIcon()
+        }
         mHeader = AccountHeaderBuilder()
             .withActivity(APP_ACTIVITY)
             .withHeaderBackground(R.drawable.header)
@@ -183,21 +181,38 @@ class AppDrawer {
                 mCurrentProfile
             )
             .build()
-
-
     }
 
     fun updateHeader(){
-        val path = "C:\\Users\\user\\AndroidStudioProjects\\MyApplication_2\\app\\src\\main\\res\\drawable\\m.jpg"
-        val fullName: String = (UserCache.currentUser?.firstName + " " + UserCache.currentUser?.lastName)
+        val path: String? = UserCache.currentUser?.photoUrl
 
-        mCurrentProfile
-            .withName(fullName)
-            .withEmail(UserCache.currentUser?.phone)
-            .withIcon(UserCache.currentUser?.photoUrl ?: path)
-
+        if (path != null && path != "") {
+            headerIcon(path)
+        }
+        else{
+            headerIcon()
+        }
         mHeader.updateProfile(mCurrentProfile)
     }
+
+    private fun headerIcon(){
+        val fullName: String = (UserCache.currentUser?.firstName + " " + UserCache.currentUser?.lastName)
+        mCurrentProfile = ProfileDrawerItem()
+            .withName(fullName)
+            .withEmail(UserCache.currentUser?.phone)
+            .withIdentifier(200)
+    }
+
+    private fun headerIcon(path: String){
+        val fullName: String = (UserCache.currentUser?.firstName + " " + UserCache.currentUser?.lastName)
+        mCurrentProfile = ProfileDrawerItem()
+            .withName(fullName)
+            .withEmail(UserCache.currentUser?.phone)
+            .withIcon(path)
+            .withIdentifier(200)
+    }
+
+
 
     private fun initLoader(){
         DrawerImageLoader.init(object: AbstractDrawerImageLoader(){

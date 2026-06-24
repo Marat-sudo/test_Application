@@ -42,6 +42,7 @@
     <string name="setting_hit_input_second_name">фамилия</string>
     <string name="username_hint">имя пользователя</string>
     <string name="setting_menu_change_background">сменить фон профилья</string>
+    <string name="friends">Друзья</string>
 
 
 </resources>
